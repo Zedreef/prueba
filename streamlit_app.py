@@ -193,31 +193,37 @@ if selected == "Inicio":
 if selected == "Buscar Investigador":
   # Función para procesar los datos del autor seleccionado
   def procesar_autor(df, autor_seleccionado):
-      # Copiar el DataFrame para evitar modificar el original
-      df_filtrado = df[df['Authors'] == autor_seleccionado].copy()
+      # Filtrar el DataFrame por autor seleccionado y eliminar filas con 'Authors' vacíos
+      df_filtrado = df[df['Authors'].notna() & (df['Authors'] != '') & (df['Authors'] == autor_seleccionado)].copy()
 
       # Mantener solo las columnas específicas que te interesan
       columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
-      df_filtrado = df_filtrado[columnas_especificas]
-
-      # Filtrar columnas de años dinámicamente (desde 1960 hasta el año más reciente en los datos)
+      
+      # Filtrar dinámicamente columnas de años (desde 1960 en adelante)
       columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
-
-      # Eliminar filas donde la columna 'Authors' esté vacía o sea NaN
-      df = df[df['Authors'].notna() & (df['Authors'] != '')]
-
-      # Mantener solo las columnas de años que no son completamente NaN o 0
-      columnas_de_años_validas = [col for col in columnas_de_años if (df[col] != 0).any() and df[col].notna().any()]
-
+      
+      # Mantener solo las columnas de años que contienen datos válidos
+      columnas_de_años_validas = [col for col in columnas_de_años if (df[col].notna() & (df[col] != 0)).any()]
+      
       # Combinar las columnas específicas con las columnas de años válidas
-      df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
+      df_final = pd.concat([df_filtrado[columnas_especificas], df_filtrado[columnas_de_años_validas]], axis=1)
 
       return df_final
 
-  # Cargar el archivo CSV en un DataFrame
-  df_publicaciones = pd.read_csv(ruta_Publicaciones)
+  # Función para calcular el resumen de citas
+  def calcular_resumen(df):
+      # Calcular la suma de 'Total Citations' y el promedio de 'Average per Year'
+      total_citations = df['Total Citations'].sum()
+      average_per_year = df['Average per Year'].mean()
 
-  # Eliminar autores repetidos y ordenarlos alfabéticamente
+      # Crear y retornar un DataFrame resumen
+      return pd.DataFrame({
+          'Métrica': ['Total de Citas', 'Promedio por Año'],
+          'Valor': [total_citations, average_per_year]
+      })
+
+  # Cargar el archivo CSV y eliminar duplicados de autores
+  df_publicaciones = pd.read_csv(ruta_Publicaciones)
   autores_unicos = df_publicaciones['Authors'].drop_duplicates().sort_values()
 
   # Configuración de la app en Streamlit
@@ -231,25 +237,13 @@ if selected == "Buscar Investigador":
       try:
           # Procesar la información del autor seleccionado
           df_resultado = procesar_autor(df_publicaciones, autor_seleccionado)
-
+          
           # Mostrar el DataFrame resultante
           st.write(f"Datos procesados para {autor_seleccionado}:")
           st.dataframe(df_resultado)
-
-          # Calcular la suma de 'Total Citations' y el promedio de 'Average per Year'
-          total_citations = df_resultado['Total Citations'].sum()
-          average_per_year = df_resultado['Average per Year'].mean()
-
-          # Crear un DataFrame con los resultados
-          resumen_data = {
-              'Métrica': ['Total de Citas', 'Promedio por Año'],
-              'Valor': [total_citations, average_per_year]
-          }
-
-          # Crear un DataFrame de pandas con la información
-          df_resumen = pd.DataFrame(resumen_data)
-
-          # Mostrar la tabla en Streamlit
+          
+          # Calcular y mostrar el resumen
+          df_resumen = calcular_resumen(df_resultado)
           st.table(df_resumen)
 
       except Exception as e:
