@@ -191,7 +191,6 @@ if selected == "Inicio":
 #-------------------------------------------------------------------------------
 
 if selected == "Buscar Investigador":
-  
   # Función para procesar los datos del autor seleccionado
   def procesar_autor(df, autor_seleccionado):
       # Copiar el DataFrame para evitar modificar el original
@@ -210,8 +209,8 @@ if selected == "Buscar Investigador":
       # Combinar las columnas específicas con las columnas de años válidas
       df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
 
-      # Eliminar filas completamente vacías
-      df_final = df_final.dropna(how='all')
+      # Eliminar filas que contengan solo ceros o valores NaN
+      df_final = df_final[(df_final.T != 0).any()]
 
       return df_final
 
