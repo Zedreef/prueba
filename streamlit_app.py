@@ -194,7 +194,8 @@ if selected == "Buscar Investigador":
   # Función para procesar los datos del autor seleccionado
   def procesar_autor(df, autor_seleccionado):
       # Filtrar el DataFrame por autor seleccionado y eliminar filas con 'Authors' vacíos
-      df_filtrado = df[df['Authors'].notna() & (df['Authors'] != '') & (df['Authors'] == autor_seleccionado)].copy()
+      df_filtrado = df[(df['Authors'].notna() & (df['Authors'] != '') & (df['Authors'] == autor_seleccionado)) &
+                      df[columnas_de_años_validas].notna().any(axis=1)].copy()
 
       # Mantener solo las columnas específicas que te interesan
       columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
