@@ -197,17 +197,14 @@ if selected == "Buscar Investigador":
       df_filtrado = df[(df['Authors'].notna() & (df['Authors'] != '') & (df['Authors'] == autor_seleccionado)) &
                       df[columnas_de_años_validas].notna().any(axis=1)].copy()
 
-      # Mantener solo las columnas específicas que te interesan
+      # Definir las columnas finales
       columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
-      
-      # Filtrar dinámicamente columnas de años (desde 1960 en adelante)
       columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
-      
-      # Mantener solo las columnas de años que contienen datos válidos
       columnas_de_años_validas = [col for col in columnas_de_años if (df[col].notna() & (df[col] != 0)).any()]
-      
-      # Combinar las columnas específicas con las columnas de años válidas
-      df_final = pd.concat([df_filtrado[columnas_especificas], df_filtrado[columnas_de_años_validas]], axis=1)
+      columnas_finales = columnas_especificas + columnas_de_años_validas
+
+      # Seleccionar las columnas finales
+      df_final = df_filtrado[columnas_finales].copy()
 
       return df_final
 
