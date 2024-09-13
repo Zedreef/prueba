@@ -195,27 +195,47 @@ if selected == "Buscar Investigador":
   st.title("Buscar Investigador")
 
   # Función para procesar los datos del autor seleccionado
-  def procesar_autor(df, autor_seleccionado):
+  #def procesar_autor(df, autor_seleccionado):
       # Filtrar el DataFrame por el autor seleccionado
-      df_filtrado = df[df['Authors'] == autor_seleccionado].copy()
+      #df_filtrado = df[df['Authors'] == autor_seleccionado].copy()
 
       # Mantener solo las columnas específicas que te interesan
-      columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
-      df_filtrado = df_filtrado[columnas_especificas]
+      #columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
+      #df_filtrado = df_filtrado[columnas_especificas]
 
       # Filtrar columnas de años dinámicamente (desde 1960 hasta el año más reciente en los datos)
-      columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
+      #columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
 
       # Mantener solo las columnas de años que no son completamente NaN o 0
-      columnas_de_años_validas = [col for col in columnas_de_años if (df[col] != 0).any() and df[col].notna().any()]
+      #columnas_de_años_validas = [col for col in columnas_de_años if (df[col] != 0).any() and df[col].notna().any()]
 
       # Combinar las columnas específicas con las columnas de años válidas
-      df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
+      #df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
 
       # Eliminar cualquier fila que esté completamente vacía
-      df_final = df_final.dropna(how='all')
+      #df_final = df_final.dropna(how='all')
 
-      return df_final
+      #return df_final
+  
+  def procesar_autor(ruta_archivo, autor_seleccionado):
+    """
+    Procesa los datos de un archivo CSV, filtra por autor y devuelve un DataFrame con los resultados.
+    """
+
+    # Cargar los datos del archivo CSV en un DataFrame
+    df = pd.read_csv(ruta_archivo)
+
+    # Filtrar por autor (asegurando la comparación en minúsculas)
+    df_final = df[df['Authors'].str.lower() == autor_seleccionado.lower()]
+
+    # Seleccionar las columnas relevantes
+    columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
+    df_final = df_final[columnas_especificas]
+
+    # Eliminar filas con valores NaN en todas las columnas
+    df_final = df_final.dropna(how='all')
+
+    return df_final
 
   # Cargar el archivo CSV en un DataFrame
   df_publicaciones = pd.read_csv(ruta_Publicaciones)
@@ -224,7 +244,7 @@ if selected == "Buscar Investigador":
   autores_unicos = df_publicaciones['Authors'].drop_duplicates().sort_values()
 
   # Configuración de la app en Streamlit
-  st.title("Análisis de Publicaciones")
+  st.title("### Análisis de Publicaciones")
 
   # Selector de autor
   autor_seleccionado = st.selectbox("Selecciona un autor", autores_unicos)
