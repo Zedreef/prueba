@@ -223,10 +223,7 @@ if selected == "Buscar Investigador":
       })
 
   # Función para graficar las citas y publicaciones por año
-  def graficar_citas_publicaciones(df, autor_seleccionado):
-      # Procesar el DataFrame con los datos del autor seleccionado
-      df_autor = procesar_autor(df, autor_seleccionado)
-      
+  def graficar_citas_publicaciones(df_autor, autor_seleccionado):
       # Extraer los años de las columnas y convertirlas en formato numérico
       columnas_de_años = [col for col in df_autor.columns if col.isdigit() and int(col) >= 1960]
       
