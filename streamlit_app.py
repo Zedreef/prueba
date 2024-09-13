@@ -209,8 +209,8 @@ if selected == "Buscar Investigador":
       # Combinar las columnas específicas con las columnas de años válidas
       df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
 
-      # Eliminar filas que contengan solo ceros o valores NaN
-      df_final = df_final[(df_final.T != 0).any()]
+      # Eliminar filas donde la columna 'Authors' esté vacía o sea NaN
+      df = df[df['Authors'].notna() & (df['Authors'] != '')]
 
       return df_final
 
