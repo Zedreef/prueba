@@ -2,3 +2,5 @@ streamlit
 pandas
 scikit-learn
 plotly
+matplotlib
+streamlit_option_menu
