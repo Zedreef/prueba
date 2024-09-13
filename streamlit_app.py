@@ -202,8 +202,8 @@ if selected == "Buscar Investigador":
       # Filtrar dinámicamente columnas de años (desde 1960 en adelante)
       columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
       
-      # Mantener solo las columnas de años que contienen datos válidos
-      columnas_de_años_validas = [col for col in columnas_de_años if (df[col].notna() & (df[col] != 0)).any()]
+      # Mantener solo las columnas de años que contienen al menos un valor distinto de 0 en el DataFrame filtrado
+      columnas_de_años_validas = [col for col in columnas_de_años if (df_filtrado[col].notna() & (df_filtrado[col] != 0)).any()]
       
       # Combinar las columnas específicas con las columnas de años válidas
       df_final = pd.concat([df_filtrado[columnas_especificas], df_filtrado[columnas_de_años_validas]], axis=1)
