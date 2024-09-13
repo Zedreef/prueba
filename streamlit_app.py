@@ -189,3 +189,69 @@ if selected == "Inicio":
     )
     st.plotly_chart(fig)
 #-------------------------------------------------------------------------------
+
+if selected == "Buscar Investigador":
+  # Encabezado
+  st.title("Buscar Investigador")
+
+  # Función para procesar los datos del autor seleccionado
+  def procesar_autor(df, autor_seleccionado):
+      # Filtrar el DataFrame por el autor seleccionado
+      df_filtrado = df[df['Authors'] == autor_seleccionado]
+
+      # Mantener solo las columnas específicas que te interesan
+      columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
+      df_filtrado = df_filtrado[columnas_especificas]
+
+      # Filtrar columnas de años dinámicamente (desde 1900 hasta el año más reciente en los datos)
+      columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
+
+      # Mantener solo las columnas de años que no son completamente NaN o 0
+      columnas_de_años_validas = [col for col in columnas_de_años if (df[col] != 0).any() and df[col].notna().any()]
+
+      # Combinar las columnas específicas con las columnas de años válidas
+      df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
+
+      return df_final
+
+  # Cargar el archivo CSV en un DataFrame
+  df_publicaciones = pd.read_csv(ruta_Publicaciones)
+
+  # Eliminar autores repetidos
+  autores_unicos = df_publicaciones['Authors'].drop_duplicates()
+
+  # Configuración de la app en Streamlit
+  st.title("Análisis de Publicaciones")
+
+  # Selector de autor
+  autor_seleccionado = st.selectbox("Selecciona un autor", autores_unicos)
+
+  # Botón para procesar
+  if st.button("Procesar"):
+      try:
+          # Procesar la información del autor seleccionado
+          df_resultado = procesar_autor(df_publicaciones, autor_seleccionado)
+
+          # Mostrar el DataFrame resultante
+          st.write(f"Datos procesados para {autor_seleccionado}:")
+          st.dataframe(df_resultado)
+
+          # Calcular la suma de 'Total Citations' y 'Average per Year'
+          total_citations = df_resultado['Total Citations'].sum()
+          average_per_year = df_resultado['Average per Year'].mean()
+
+          # Crear un DataFrame con los resultados
+          resumen_data = {
+              'Métrica': ['Total de Citas', 'Promedio por Año'],
+              'Valor': [total_citations, average_per_year]
+          }
+
+          # Crear un DataFrame de pandas con la información
+          df_resumen = pd.DataFrame(resumen_data)
+
+          # Mostrar la tabla en Streamlit
+          st.table(df_resumen)
+
+      except Exception as e:
+          st.error(f"Error procesando los datos: {e}")
+
