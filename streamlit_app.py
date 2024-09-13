@@ -222,6 +222,7 @@ if selected == "Buscar Investigador":
           'Valor': [total_citations, average_per_year]
       })
 
+  # Función para graficar las citas y publicaciones por año
   def graficar_citas_publicaciones(df, autor_seleccionado):
       # Procesar el DataFrame con los datos del autor seleccionado
       df_autor = procesar_autor(df, autor_seleccionado)
@@ -276,7 +277,8 @@ if selected == "Buscar Investigador":
           )
       )
 
-      fig.show()  
+      # Mostrar la gráfica en Streamlit
+      st.plotly_chart(fig)
 
   # Cargar el archivo CSV y eliminar duplicados de autores
   df_publicaciones = pd.read_csv(ruta_Publicaciones)
@@ -303,7 +305,7 @@ if selected == "Buscar Investigador":
           st.table(df_resumen)
 
           #Grafica con los datos
-          graficar_citas_publicaciones(df, {autor_seleccionado})
+          graficar_citas_publicaciones(df, autor_seleccionado)
 
       except Exception as e:
           st.error(f"Error procesando los datos: {e}")
