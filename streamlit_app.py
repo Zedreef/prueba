@@ -302,7 +302,7 @@ if selected == "Buscar Investigador":
           st.table(df_resumen)
 
           #Grafica con los datos
-          graficar_citas_publicaciones(df, autor_seleccionado)
+          graficar_citas_publicaciones(df_resultado, autor_seleccionado)
 
       except Exception as e:
           st.error(f"Error procesando los datos: {e}")
