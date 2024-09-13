@@ -203,14 +203,14 @@ if selected == "Buscar Investigador":
       # Filtrar columnas de años dinámicamente (desde 1960 hasta el año más reciente en los datos)
       columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
 
+      # Eliminar filas donde la columna 'Authors' esté vacía o sea NaN
+      df = df[df['Authors'].notna() & (df['Authors'] != '')]
+
       # Mantener solo las columnas de años que no son completamente NaN o 0
       columnas_de_años_validas = [col for col in columnas_de_años if (df[col] != 0).any() and df[col].notna().any()]
 
       # Combinar las columnas específicas con las columnas de años válidas
       df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
-
-      # Eliminar filas donde la columna 'Authors' esté vacía o sea NaN
-      df = df[df['Authors'].notna() & (df['Authors'] != '')]
 
       return df_final
 
