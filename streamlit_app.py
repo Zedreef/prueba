@@ -56,7 +56,7 @@ def procesar_estadisticas_autores(ruta_final):
 # ----------------------- Definicion -------------------------------------------
 
 # Definir las rutas
-ruta_guardado = '/Datos Completos'
+ruta_guardado = '/mount/src/prueba/Datos Completos'
 ruta_Publicaciones = 'Analisis/Publicaciones.csv'
 #ruta_guardado = "/content/drive/MyDrive/Investigadores IA/Archivos Limpios"
 #ruta_final = '/content/drive/MyDrive/Investigadores IA/Datos Para Analizar/Publicaciones.csv'
