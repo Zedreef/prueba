@@ -222,6 +222,62 @@ if selected == "Buscar Investigador":
           'Valor': [total_citations, average_per_year]
       })
 
+  def graficar_citas_publicaciones(df, autor_seleccionado):
+      # Procesar el DataFrame con los datos del autor seleccionado
+      df_autor = procesar_autor(df, autor_seleccionado)
+      
+      # Extraer los años de las columnas y convertirlas en formato numérico
+      columnas_de_años = [col for col in df_autor.columns if col.isdigit() and int(col) >= 1960]
+      
+      # Crear DataFrame para Publicaciones y Citas
+      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()  # Número de publicaciones (conteo de > 0 por año)
+      citas_por_año = df_autor[columnas_de_años].sum()  # Total de citas por año
+      
+      # Crear la gráfica de líneas con Plotly
+      fig = go.Figure()
+
+      # Agregar la línea para las publicaciones (Eje izquierdo)
+      fig.add_trace(go.Scatter(
+          x=columnas_de_años,
+          y=publicaciones_por_año,
+          mode='lines+markers',
+          name='Publications',
+          yaxis='y1'
+      ))
+
+      # Agregar la línea para las citas (Eje derecho)
+      fig.add_trace(go.Scatter(
+          x=columnas_de_años,
+          y=citas_por_año,
+          mode='lines+markers',
+          name='Times Cited',
+          yaxis='y2'
+      ))
+
+      # Configurar los ejes
+      fig.update_layout(
+          title=f"Times Cited and Publications Over Time for {autor_seleccionado}",
+          xaxis_title='Year',
+          yaxis=dict(
+              title='Publications',
+              side='left'
+          ),
+          yaxis2=dict(
+              title='Times Cited',
+              overlaying='y',
+              side='right'
+          ),
+          legend=dict(
+              orientation="h",
+              yanchor="bottom",
+              y=1.02,
+              xanchor="right",
+              x=1
+          )
+      )
+
+      fig.show()  
+
   # Cargar el archivo CSV y eliminar duplicados de autores
   df_publicaciones = pd.read_csv(ruta_Publicaciones)
   autores_unicos = df_publicaciones['Authors'].drop_duplicates().sort_values()
@@ -245,6 +301,9 @@ if selected == "Buscar Investigador":
           # Calcular y mostrar el resumen
           df_resumen = calcular_resumen(df_resultado)
           st.table(df_resumen)
+
+          #Grafica con los datos
+          graficar_citas_publicaciones(df, {autor_seleccionado})
 
       except Exception as e:
           st.error(f"Error procesando los datos: {e}")
