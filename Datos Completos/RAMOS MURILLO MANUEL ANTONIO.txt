@@ -1,0 +1,4 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2022,2023,2024
+"Krohnkite-type K<sub>2</sub>Mn(SO<sub>4</sub>)<sub>2</sub>(H<sub>2</sub>O)<sub>2</sub> double salt: synthesis, structure, and properties",RAMOS MURILLO MANUEL ANTONIO,8,,JOURNAL OF MATERIALS SCIENCE,MAY 2022,57.0,,,4,1.33,1,2,1
+Comparison of Three Supervised Machine Learning Classification Methods for the Diagnosis of PD,RAMOS MURILLO MANUEL ANTONIO,6,"Bravo, J; Ochoa, S; Favela, J",PROCEEDINGS OF THE INTERNATIONAL CONFERENCE ON UBIQUITOUS COMPUTING & AMBIENT INTELLIGENCE (UCAMI 2022),2023,594.0,Proceedings of the International Conference on Ubiquitous Computing & Ambient Intelligence (UCAmI),"NOV 29-DEC 02, 2022",1,0.5,0,1,0
+Advanced catalytic materials: Nano and bulk,RAMOS MURILLO MANUEL ANTONIO,4,,MRS COMMUNICATIONS,,,,,0,0.0,0,0,0

@@ -1,0 +1,6 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2017,2018,2019,2020,2021,2022,2023,2024
+Optimization of Type 4 composite pressure vessels using genetic algorithms and simulated annealing,ALCANTAR CAMARENA VICTOR ALFONSO,5,,INTERNATIONAL JOURNAL OF HYDROGEN ENERGY,JUN 15 2017,42,,,45,5.63,1,2,2,3,5,10,11,11
+Thermal characterization of an alkaline electrolysis cell for hydrogen production at atmospheric pressure,ALCANTAR CAMARENA VICTOR ALFONSO,5,,FUEL,SEP 15 2020,276,,,35,7.0,0,0,0,0,7,8,10,10
+Optimization of type III pressure vessels using genetic algorithm and simulated annealing,ALCANTAR CAMARENA VICTOR ALFONSO,5,,INTERNATIONAL JOURNAL OF HYDROGEN ENERGY,AUG 3 2017,42,,,26,3.25,0,2,3,4,4,5,2,6
+Effect of the ball burnishing on the surface quality and mechanical properties of a TRIP steel sheet,ALCANTAR CAMARENA VICTOR ALFONSO,6,,INTERNATIONAL JOURNAL OF ADVANCED MANUFACTURING TECHNOLOGY,OCT 2021,116,,,9,2.25,0,0,0,0,1,2,6,0
+"Structural design of an agricultural backhoe using TA, FEA, RSM and ANN",ALCANTAR CAMARENA VICTOR ALFONSO,7,,COMPUTERS AND ELECTRONICS IN AGRICULTURE,MAY 2020,172,,,8,1.6,0,0,0,1,2,1,3,1

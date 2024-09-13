@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+IMPACT OF THE CHAMBER SHAPE ON A SOFT ACTUATOR MECHANISM TO MIMIC THE ESOPHAGEAL SWALLOWING PROCESS,ASCANIO GASCA GABRIEL,6,,"PROCEEDINGS OF THE ASME INTERNATIONAL MECHANICAL ENGINEERING CONGRESS AND EXPOSITION, 2018, VOL 9",2019,,ASMEInternational Mechanical Engineering Congress and Exposition (IMECE2018),"NOV 09-15, 2018",0,0.0

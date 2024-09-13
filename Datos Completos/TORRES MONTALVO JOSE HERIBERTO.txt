@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2003,2010,2011,2019,2024
+Genetic variability among and within host-specialized isolates of <i>Sporisorium reilianum</i>,TORRES MONTALVO JOSE HERIBERTO,2,"Leslie, JF",SORGHUM AND MILLETS DISEASES,2003,,3rd Global Conference on Sorghum and Millets Diseases,"SEP, 2000",5,0.23,1,1,1,1,1

@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+Pertactin evaluation as immunogen in murine model,MONTARAZ CRESPO JUAN ANTONIO,4,,INTERNATIONAL JOURNAL OF ANTIMICROBIAL AGENTS,MAR 2007,29,17th European Congress of Clinical Microbiology and Infectious Diseases/25th International Congress of Chemotherapy,"MAR 31-APR 03, 2007",0,0.0

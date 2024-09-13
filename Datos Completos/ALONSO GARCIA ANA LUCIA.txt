@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2023,2024
+Gene expression and locomotor recovery in adult rats with spinal cord injury and plasma-synthesized polypyrrole/iodine application combined with a mixed rehabilitation scheme,ALONSO GARCIA ANA LUCIA,15,,FRONTIERS IN NEUROLOGY,MAY 23 2023,14,,,4,2.0,1,3

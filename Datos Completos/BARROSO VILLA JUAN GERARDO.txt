@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+Follicular fluid biomarkers for prediction of human IVF outcome in women with poor ovarian response,BARROSO VILLA JUAN GERARDO,7,,MIDDLE EAST FERTILITY SOCIETY JOURNAL,JAN 23 2023,28,,,0,0.0

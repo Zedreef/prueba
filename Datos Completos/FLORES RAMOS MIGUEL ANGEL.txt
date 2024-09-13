@@ -1,0 +1,8 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2021,2022,2023,2024
+"Design, synthesis, kinetic, molecular dynamics, and hypoglycemic effect characterization of new and potential selective benzimidazole derivatives as Protein Tyrosine Phosphatase 1B inhibitors",FLORES RAMOS MIGUEL ANGEL,14,,BIOORGANIC & MEDICINAL CHEMISTRY,OCT 15 2021,48,,,4,1.0,0,1,2,1
+Efficiency comparison of experimental fosfatriclaben with three commercial fasciolicides in experimentally infected sheep,FLORES RAMOS MIGUEL ANGEL,6,,PARASITOLOGY RESEARCH,AUG 2020,119,,,4,0.8,3,0,0,1
+Effectiveness of an experimental injectable prodrug formulation against <i>Fasciola hepatica</i> of different ages in experimentally infected sheep,FLORES RAMOS MIGUEL ANGEL,7,,VETERINARY PARASITOLOGY,OCT 2021,298,,,3,0.75,0,0,1,2
+Structure-Based Optimization of Carbendazim-Derived Tubulin Polymerization Inhibitors through Alchemical Free Energy Calculations,FLORES RAMOS MIGUEL ANGEL,12,,JOURNAL OF CHEMICAL INFORMATION AND MODELING,NOV 10 2023,63,,,1,0.5,0,0,0,1
+Dynamic Kinetic Resolution of Azlactones by Bifunctional Thioureas with α-Trifluoromethyl or Methyl Groups,FLORES RAMOS MIGUEL ANGEL,6,,SYNLETT,OCT 21 2022,33,,,1,0.33,0,0,1,0
+"Fosfatriclaben, a prodrug of triclabendazole: Preparation, stability, and fasciolicidal activity of three new intramuscular formulations",FLORES RAMOS MIGUEL ANGEL,11,,VETERINARY PARASITOLOGY,APR 2024,327,,,0,0.0,0,0,0,0
+Field study on the determination of the effective dose of injectable fosfatriclaben prodrug in sheep naturally infected with <i>Fasciola hepatica</i>,FLORES RAMOS MIGUEL ANGEL,6,,PARASITOLOGY RESEARCH,JAN 2022,121,,,0,0.0,0,0,0,0

@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2014,2017
+"A Voltammetry Study of Ethanol Oxidation on Carbon Supported, Non Alloyed Platinum-Tungsten Catalysts",HERNANDEZ MAYA ROBERTO CARLOS,5,,JOURNAL OF THE ELECTROCHEMICAL SOCIETY,2013,160,,,3,0.25,2,1

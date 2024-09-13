@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2015,2016,2017,2018,2019,2020,2021,2022,2023
+Binder effect on the catalytic activity of MoO<sub>3</sub> bulk catalyst reduced by H<sub>2</sub> for <i>n</i>-heptane hydroisomerization,HERNANDEZ PEREZ FIDENCIO,5,,FUEL,JAN 2014,117,,,26,2.36,2,7,2,3,4,2,2,3,1

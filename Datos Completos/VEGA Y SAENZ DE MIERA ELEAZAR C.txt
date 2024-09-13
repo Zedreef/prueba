@@ -1,0 +1,8 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024
+Deletion of <i>PTENP1</i> Pseudogene in Human Melanoma,VEGA Y SAENZ DE MIERA ELEAZAR C,9,,JOURNAL OF INVESTIGATIVE DERMATOLOGY,DEC 2011,131,,,71,5.07,0,2,5,10,6,7,10,9,3,6,6,6,1,0
+Integrative Genomics Identifies Molecular Alterations that Challenge the Linear Model of Melanoma Progression,VEGA Y SAENZ DE MIERA ELEAZAR C,17,,CANCER RESEARCH,APR 1 2011,71,,,51,3.64,2,3,9,6,6,4,3,2,4,2,2,2,4,2
+Melanoma-Secreted Amyloid Beta Suppresses Neuroinflammation and Promotes Brain Metastasis,VEGA Y SAENZ DE MIERA ELEAZAR C,30,,CANCER DISCOVERY,MAY 2022,12,,,29,9.67,0,0,0,0,0,0,0,0,0,0,0,6,15,7
+The histone demethylase PHF8 regulates TGFβ signaling and promotes melanoma metastasis,VEGA Y SAENZ DE MIERA ELEAZAR C,16,,SCIENCE ADVANCES,FEB 2022,8,,,16,5.33,0,0,0,0,0,0,0,0,0,0,0,3,8,5
+Microglandular adenosis is an advanced precursor breast lesion with evidence of molecular progression to matrix-producing metaplastic carcinoma,VEGA Y SAENZ DE MIERA ELEAZAR C,9,,HUMAN PATHOLOGY,MAR 2019,85,,,10,1.67,0,0,0,0,0,0,0,0,1,1,1,3,2,2
+Integration of melanoma genotyping in clinical care,VEGA Y SAENZ DE MIERA ELEAZAR C,12,,CANCER RESEARCH,JUL 15 2015,75,AACR Special Conference on Advances in Melanoma - From Biology to Therapy,"SEP 20-23, 2014",0,0.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Hyperactivation of RSK1 is a hallmark of metastatic nodular melanoma,VEGA Y SAENZ DE MIERA ELEAZAR C,14,,CANCER RESEARCH,JUL 15 2015,75,AACR Special Conference on Advances in Melanoma - From Biology to Therapy,"SEP 20-23, 2014",0,0.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,5 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2023,2024
+High-temperature adaptation of an <i>OsNRT2</i>.<i>3</i> allele is thermoregulated by small RNAs,HERRERA ESTRELLA LUIS RAFAEL,20,,SCIENCE ADVANCES,NOV 25 2022,8,,,5,1.67,4,1
+Identification of bZIP Transcription Factors That Regulate the Development of Leaf Epidermal Cells in <i>Arabidopsis thaliana</i> by Single-Cell RNA Sequencing,HERRERA ESTRELLA LUIS RAFAEL,15,,INTERNATIONAL JOURNAL OF MOLECULAR SCIENCES,MAR 2024,25,,,1,1.0,0,1
+Breaking new ground: Decoding the root's molecular circuits to penetrate compacted soil,HERRERA ESTRELLA LUIS RAFAEL,2,,DEVELOPMENTAL CELL,FEB 26 2024,59,,,1,1.0,0,1
+Transcriptomic analysis of<i> Chaetoceros</i><i> muelleri</i> in response to different nitrogen concentrations reveals the activation of pathways to enable efficient nitrogen uptake,HERRERA ESTRELLA LUIS RAFAEL,6,,GENE,OCT 5 2024,924,,,0,0.0,0,0

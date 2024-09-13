@@ -1,0 +1,3 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+CATALYTIC ENGINEERED MATERIALS FOR COMMERCIAL AND INDUSTRIAL ENERGY APPLICATIONS Introduction,RAMIREZ SOLIS JORGE FERNANDO,4,,JOURNAL OF MATERIALS RESEARCH,NOV 14 2018,33,,,0,0.0
+"Special issue on selected contributions of the 8th International Symposium on Advanced Catalytic Materials"" Cancun Mexico August 17-20 2015""",RAMIREZ SOLIS JORGE FERNANDO,3,,CATALYSIS TODAY,MAR 15 2017,282,,,0,0.0

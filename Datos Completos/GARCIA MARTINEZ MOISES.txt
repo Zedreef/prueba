@@ -1,0 +1,6 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2020,2021,2022,2023,2024
+Sensors for Sustainable Smart Cities: A Review,GARCIA MARTINEZ MOISES,16,,APPLIED SCIENCES-BASEL,SEP 2021,11.0,,,43,10.75,0,2,10,18,13
+"Assessment of analgesia, sedation, physical restraint and delirium in patients admitted to Spanish intensive care units. Proyecto ASCyD",GARCIA MARTINEZ MOISES,83,,ENFERMERIA INTENSIVA,JAN-MAR 2020,31.0,,,13,2.6,1,2,3,1,6
+NAO robots as context to teach numerical methods,GARCIA MARTINEZ MOISES,3,,INTERNATIONAL JOURNAL OF INTERACTIVE DESIGN AND MANUFACTURING - IJIDEM,DEC 2022,16.0,,,3,1.0,0,0,0,2,1
+An Early Introduction to Cryptography with Engineering Students,GARCIA MARTINEZ MOISES,3,"Hosseini, S; Peluffo, DH; Nganji, J; Arrona-Palacios, A",TECHNOLOGY-ENABLED INNOVATIONS IN EDUCATION,2022,,7th International Conference on Educational Innovation(CIIE),"DEC 14-18, 2020",0,0.0,0,0,0,0,0
+Encryption activity to improve higher-order thinking in engineering students,GARCIA MARTINEZ MOISES,3,,INTERNATIONAL JOURNAL OF INTERACTIVE DESIGN AND MANUFACTURING - IJIDEM,SEP 2021,15.0,,,0,0.0,0,0,0,0,0

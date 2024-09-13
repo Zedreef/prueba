@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2022,2023,2024
+"Structural, Optical and Photocatalytic Characterization of Zn<sub>x</sub>Cd<sub>1-x</sub>S Solid Solutions Synthetized Using a Simple Ultrasonic Radiation Method",ORNELAS GUTIERREZ CARLOS ELIAS,7,,ENERGIES,NOV 2020,13,,,5,1.0,1,2,2

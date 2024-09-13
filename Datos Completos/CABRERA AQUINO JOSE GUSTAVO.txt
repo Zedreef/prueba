@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2013,2016,2017,2019,2020
+Cetuximab concomitant with gemcitabine and radiotherapy in advanced squamous cell carcinomas of upper aerodigestive tract: a pilot study,CABRERA AQUINO JOSE GUSTAVO,10,,CLINICAL & TRANSLATIONAL ONCOLOGY,FEB 2011,13,,,6,0.43,1,2,1,1,1

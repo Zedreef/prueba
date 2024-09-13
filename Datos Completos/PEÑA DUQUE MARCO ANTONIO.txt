@@ -1,0 +1,6 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2011,2015,2019,2020,2022
+Early Stenosis in a Gore-Tex Graft Connected to the Left Main: An Emergency Transradial Angioplasty for a Complication in a Cabrol Procedure,PEÑA DUQUE MARCO ANTONIO,3,,JOURNAL OF INVASIVE CARDIOLOGY,OCT 2012,24,,,7,0.54,0,1,2,1,3
+Risk factors of vascular complications in lower limbs in diabetic patients,PEÑA DUQUE MARCO ANTONIO,6,,MEDICINA CLINICA,APR 9 2011,136,,,2,0.14,1,1,0,0,0
+Percutaneous Closure of Complex Fistulas Between the Left Main Coronary Artery and Right Atrium. Report of 3 Cases,PEÑA DUQUE MARCO ANTONIO,4,,REVISTA ESPANOLA DE CARDIOLOGIA,JUL 2017,70,,,0,0.0,0,0,0,0,0
+Safety and Efficacy of Ulnar Approach. A New Route for Cardiac Catheterization and Intervention,PEÑA DUQUE MARCO ANTONIO,7,,JOURNAL OF THE AMERICAN COLLEGE OF CARDIOLOGY,NOV 8 2011,58,23rd Annual Transcatheter Cardiovascular Therapeutics (TCT) Symposium,"NOV 07-11, 2011",0,0.0,0,0,0,0,0
+The interleukin Ib-511 polymorphism is associated with the risk of developing restenosis after coronary stenting in Mexican patients,PEÑA DUQUE MARCO ANTONIO,9,,AMERICAN JOURNAL OF CARDIOLOGY,OCT 20 2007,100,19th Annual Transcatheter Cardiovascular Therapeutics Symposium,"OCT 20-25, 2007",0,0.0,0,0,0,0,0

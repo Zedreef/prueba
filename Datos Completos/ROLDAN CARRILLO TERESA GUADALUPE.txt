@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2021
+Bioremediation of an agricultural saline soil contaminated with endosulfan and Escherichia coli by an active surface agent induced in a Penicillium crustosum culture,ROLDAN CARRILLO TERESA GUADALUPE,6,,PREPARATIVE BIOCHEMISTRY & BIOTECHNOLOGY,MAR 1 2022,52,,,1,0.25,1

@@ -1,0 +1,9 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,1999,2000,2001,2002,2003,2004,2005,2006,2009,2010,2011,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2024
+Ronchi test with a square grid,LUNA AGUILAR ESTEBAN ANTOLIN,5,,APPLIED OPTICS,FEB 1 1998,37,,,38,1.41,3,3,5,1,1,2,1,0,0,1,2,4,0,3,3,0,1,1,2,2,2,1
+Edge effects with Preston equation,LUNA AGUILAR ESTEBAN ANTOLIN,8,"Angel, JRP; Gilmozzi, R",FUTURE GIANT TELESCOPES,2003,4840,Conference on Future Giant Telescopes,"AUG 26-28, 2002",17,0.77,0,0,0,0,0,0,0,0,1,1,0,0,3,0,3,1,2,2,1,1,2,0
+Only one fitting for bironchigrams,LUNA AGUILAR ESTEBAN ANTOLIN,4,,APPLIED OPTICS,NOV 1 2001,40,,,4,0.17,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,1
+Polarimetric piston detection,LUNA AGUILAR ESTEBAN ANTOLIN,3,,REVISTA MEXICANA DE FISICA,JUN 2004,50,,,2,0.1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1
+Polishing TIM mirror segments with HyDra,LUNA AGUILAR ESTEBAN ANTOLIN,14,"Angel, JRP; Gilmozzi, R",FUTURE GIANT TELESCOPES,2003,4840,Conference on Future Giant Telescopes,"AUG 26-28, 2002",2,0.09,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+RONCHI-HARTMANN NULL TEST,LUNA AGUILAR ESTEBAN ANTOLIN,3,,REVISTA MEXICANA DE FISICA,FEB 1992,38,,,2,0.06,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+Paraxial curvature and conic constant of conic concave surface measurement.,LUNA AGUILAR ESTEBAN ANTOLIN,2,,REVISTA MEXICANA DE FISICA,DEC 1995,41,,,1,0.03,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+Pointing angle for panels of the large millimetric telescope,LUNA AGUILAR ESTEBAN ANTOLIN,4,,REVISTA MEXICANA DE FISICA,FEB 2001,47,,,0,0.0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

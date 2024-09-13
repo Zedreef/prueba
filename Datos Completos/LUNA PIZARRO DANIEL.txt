@@ -1,0 +1,5 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2007,2009,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024
+Comparison of a technique using a new percutaneous osteosynthesis device with conventional open surgery for displaced patella fractures in a randomized controlled trial,LUNA PIZARRO DANIEL,5,,JOURNAL OF ORTHOPAEDIC TRAUMA,SEP 2006,20,,,49,2.58,2,2,4,3,5,1,4,3,6,4,3,2,5,3,2,0
+Haemophilic arthropathy: the usefulness of intra-articular oxytetracycline (synoviorthesis) in the treatment of chronic synovitis in children,LUNA PIZARRO DANIEL,5,,HAEMOPHILIA,MAR 2011,17,,,9,0.64,0,0,0,2,1,1,0,0,1,0,0,2,0,1,0,1
+Monoarthritis of the Knee With Unusual Lesions in Adults Associated With Varicella-Zoster Virus Infection,LUNA PIZARRO DANIEL,6,,ARTHROSCOPY-THE JOURNAL OF ARTHROSCOPIC AND RELATED SURGERY,JAN 2009,25,,,6,0.38,0,3,1,0,0,0,0,0,0,0,0,1,0,0,1,0
+Distal femoral dome varus osteotomy: Surgical technique with minimal dissection and external fixation,LUNA PIZARRO DANIEL,4,,KNEE,MAR 2012,19,,,4,0.31,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0

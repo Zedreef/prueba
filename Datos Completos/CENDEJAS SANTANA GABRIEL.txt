@@ -1,0 +1,3 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2008,2012,2016,2017,2021
+Progesterone crystallization from a solvent:: a new procedure,CENDEJAS SANTANA GABRIEL,3,,MATERIALS RESEARCH INNOVATIONS,DEC 2002,6,,,6,0.26,1,1,1,1,2
+Growth and characterization of progesterone crystallites,CENDEJAS SANTANA GABRIEL,3,,REVISTA MEXICANA DE FISICA,JUN 2004,50,6th National Congress of the Asociacion-Mexicana-de-Microscopia,"SEP, 2002",0,0.0,0,0,0,0,0

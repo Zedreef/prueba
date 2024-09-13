@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2021,2023
+Impact of variables on the naphthalene hydrogenation for the tetralin formation towards BTX production,LAREDO SANCHEZ GEORGINA CECILIA,5,,INTERNATIONAL JOURNAL OF OIL GAS AND COAL TECHNOLOGY,2020,23,,,2,0.4,1,1

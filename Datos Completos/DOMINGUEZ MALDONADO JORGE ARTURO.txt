@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+"Microbial communities present in <i>Sargassum</i> spp. leachates from the Mexican Caribbean which are involved in their degradation in the environment, a tool to tackle the problem",DOMINGUEZ MALDONADO JORGE ARTURO,7,,ENVIRONMENTAL SCIENCE AND POLLUTION RESEARCH,MAR 2024,31,,,0,0.0

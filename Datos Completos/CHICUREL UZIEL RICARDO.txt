@@ -1,0 +1,5 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+The Mexican Contribution to Mechanism and Machine Science and Technology,CHICUREL UZIEL RICARDO,4,"Ceccarelli, M",TECHNOLOGY DEVELOPMENTS: THE ROLE OF MECHANISM AND MACHINE SCIENCE AND IFTOMM,2011,,,,0,0.0
+Sealing system for a rotary expander,CHICUREL UZIEL RICARDO,4,,MECHANISM AND MACHINE THEORY,SEP 2010,45.0,,,0,0.0
+Contribution of the National University of Mexico to electric vehicle technology,CHICUREL UZIEL RICARDO,4,"Ceballos, S","CERMA2006: ELECTRONICS, ROBOTICS AND AUTOMOTIVE MECHANICS CONFERENCE, VOL 1, PROCEEDINGS",2006,,"Electronics, Robotics and Automotive Mechanics Conference","SEP 26-29, 2006",0,0.0
+Some developments of machines and mechanisms in Mexico,CHICUREL UZIEL RICARDO,3,"Ceccarelli, M","INTERNATIONAL SYMPOSIUM ON HISTORY OF MACHINES AND MECHANISMS, PROCEEDINGS HMM 2000",2000,,International Symposium on History of Machines and Mechanisms,"MAY 11-13, 2000",0,0.0

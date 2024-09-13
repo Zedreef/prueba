@@ -1,0 +1,8 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2015,2017,2018,2019,2020,2021,2022,2023,2024
+Synchronization Technique of Grid-Connected Power Converters Based on a Limit Cycle Oscillator,VAZQUEZ OVIEDO ERICK ISRAEL,3,,IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS,JAN 2018,65.0,,,50,7.14,0,0,6,9,7,8,10,6,4
+Modified Sandia voltage shift anti-islanding scheme for distributed power generator systems,VAZQUEZ OVIEDO ERICK ISRAEL,3,,IET POWER ELECTRONICS,DEC 24 2020,13.0,,,6,1.2,0,0,0,0,0,1,2,2,1
+Modeling Study of a Combined Fuel-Cell Stack/Switch Mode DC-DC Converter,VAZQUEZ OVIEDO ERICK ISRAEL,4,,JOURNAL OF FUEL CELL SCIENCE AND TECHNOLOGY,FEB 2014,11.0,,,4,0.36,1,2,0,0,0,1,0,0,0
+Current control based on limit cycle stability for photovoltaic arrays,VAZQUEZ OVIEDO ERICK ISRAEL,3,,IET RENEWABLE POWER GENERATION,APR 6 2020,14.0,,,3,0.6,0,0,0,0,1,0,0,2,0
+Stability analysis of limit cycle oscillators synchronised with the grid based on a large signal nonlinear method,VAZQUEZ OVIEDO ERICK ISRAEL,3,,ELECTRIC POWER SYSTEMS RESEARCH,NOV 2023,224.0,,,1,0.5,0,0,0,0,0,0,0,0,1
+Multilevel Limit Cycle Oscillator for Synchronizing Grid Connected Inverters in Fault Ride-Through Applications,VAZQUEZ OVIEDO ERICK ISRAEL,3,,IEEE TRANSACTIONS ON INDUSTRIAL ELECTRONICS,,,,,0,0.0,0,0,0,0,0,0,0,0,0
+Pointing correction based on limit cycles oscillators applied on a heliostats field digital twin,VAZQUEZ OVIEDO ERICK ISRAEL,6,,SUSTAINABLE ENERGY TECHNOLOGIES AND ASSESSMENTS,AUG 2024,68.0,,,0,0.0,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+Variation of cytochrome oxidase-I gene and venom proteins of <i>Rhopalurus junceus</i> populations in the <i>Moanicum</i> sector: Pharmacological implications,POSSANI POSTAY LOURIVAL DOMINGOS,6,,JOURNAL OF PHARMACY & PHARMACOGNOSY RESEARCH,JAN-FEB 2021,9,,,0,0.0

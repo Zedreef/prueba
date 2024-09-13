@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2017,2018,2019,2020,2021,2022,2023,2024
+Theoretical Study of the Aliphatic-Chain Length's Electronic Effect on the Corrosion Inhibition Activity of Methylimidazole-Based Ionic Liquids,MONTIEL SANCHEZ LUISA ELENA,6,,INDUSTRIAL & ENGINEERING CHEMISTRY RESEARCH,MAR 30 2016,55,,,28,3.11,3,4,2,7,2,7,2,1

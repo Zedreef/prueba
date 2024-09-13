@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2017,2018,2019,2020,2021,2022,2023,2024
+Emulsion flooding for enhanced oil recovery: Filtration model and numerical simulation,MOCTEZUMA BERTHIER ANDRES EDUARDO,7,,JOURNAL OF PETROLEUM SCIENCE AND ENGINEERING,JUL 2016,143,,,43,4.78,5,3,5,4,12,6,5,3

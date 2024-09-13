@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2001,2002,2005,2007,2008,2013,2014
+"New insights into the mechanism of 1,2-bis(trimethylsilyloxy)-tetraphenylethane-induced free radical polymerization:: application to the synthesis of block and graft copolymers",DE LEON SAENZ MARIA ESTHER,4,,MACROMOLECULAR CHEMISTRY AND PHYSICS,JAN 2000,201,,,14,0.56,5,3,2,1,1,1,1

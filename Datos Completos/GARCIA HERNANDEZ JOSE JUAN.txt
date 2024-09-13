@@ -1,0 +1,4 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+Business process discovery as a service with event log privacy and access control over discovered models,GARCIA HERNANDEZ JOSE JUAN,4,,COMPUTING,,,,,0,0.0
+On the Decentralization of Attribute-Based Encryption Schemes,GARCIA HERNANDEZ JOSE JUAN,4,,"2023 MEXICAN INTERNATIONAL CONFERENCE ON COMPUTER SCIENCE, ENC",2024.0,,Mexican International Conference on Computer Science (ENC),"SEP 11-13, 2023",0,0.0
+A cloud-based platform for encrypted data mining as a service,GARCIA HERNANDEZ JOSE JUAN,5,,"2023 MEXICAN INTERNATIONAL CONFERENCE ON COMPUTER SCIENCE, ENC",2024.0,,Mexican International Conference on Computer Science (ENC),"SEP 11-13, 2023",0,0.0

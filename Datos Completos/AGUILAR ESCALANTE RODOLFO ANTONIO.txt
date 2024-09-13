@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+The military career in eighteenth-century Philippines and its relationship with trade and politics. The case of General Pedro Zacarias Villarreal,AGUILAR ESCALANTE RODOLFO ANTONIO,1,,REVISTA DE INDIAS,2022,82,,,0,0.0

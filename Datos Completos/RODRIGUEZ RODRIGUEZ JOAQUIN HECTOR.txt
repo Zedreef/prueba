@@ -1,0 +1,9 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2015,2016,2017,2019,2020,2021,2022,2023,2024
+Direct optical techniques for the measurement of water content in oil-paper insulation in power transformers,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,5,,MEASUREMENT SCIENCE AND TECHNOLOGY,JUN 2011,22,,,8,0.57,0,3,1,1,2,0,0,0,1
+Temperature sensing characteristics of tapered Yb-doped fiber amplifiers,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,5,,OPTIK,2013,124,,,7,0.58,1,0,2,0,2,0,1,1,0
+Simple Geomagnetic Induced Current Detection and Monitoring in Power Transformers,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,3,,MEASUREMENT & CONTROL,SEP 2016,49,,,2,0.22,0,0,0,0,0,1,1,0,0
+Simple Acoustic Sensor Array for Partial Discharge Detection and Location in Electrical Apparatus,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,3,,MEASUREMENT & CONTROL,MAY 2015,48,,,2,0.2,0,0,0,0,1,0,0,1,0
+Temperature tuning of superluminescent Er<SUP>3+</SUP>-doped source based on Mach-Zehnder interferometer and long-period fiber gratings,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,4,,OPTICAL ENGINEERING,JAN 2016,55,,,1,0.11,0,0,0,0,1,0,0,0,0
+Transparency powers levels in Yb<SUP>3+</SUP>-doped fiber due to temperature changes,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,5,,OPTICAL FIBER TECHNOLOGY,MAR 2011,17,,,1,0.07,1,0,0,0,0,0,0,0,0
+Magnetic core short circuit testing techniques for electrical power generators,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,5,,IET GENERATION TRANSMISSION & DISTRIBUTION,DEC 8 2016,10,,,0,0.0,0,0,0,0,0,0,0,0,0
+Powerless Insulated DC-AC Voltage Measurement by Photovoltaic Energy Harvesting from a P-N Collector-Base Junction in an Opto-Insulator,RODRIGUEZ RODRIGUEZ JOAQUIN HECTOR,1,,MEASUREMENT & CONTROL,FEB 2014,47,,,0,0.0,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,34 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2009,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024
+Molecular-Level Modeling and Simulation of Vacuum Gas Oil Hydrocracking,ALVAREZ MAJMUTOV ANTON,3,,ENERGY & FUELS,JAN 2016,30,,,32,3.56,0,0,4,3,2,8,1,7,3,2,2
+Deriving the Molecular Composition of Vacuum Distillates by Integrating Statistical Modeling and Detailed Hydrocarbon Characterization,ALVAREZ MAJMUTOV ANTON,3,,ENERGY & FUELS,DEC 2015,29,,,32,3.2,0,0,4,3,2,8,1,7,3,2,2
+Co-processing of Hydrothermal Liquefaction Biocrude with Vacuum Gas Oil through Hydrotreating and Hydrocracking to Produce Low-Carbon Fuels,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,JUN 18 2020,34,,,29,5.8,0,0,0,0,0,0,0,9,6,7,7
+Co-hydroprocessing HTL Biocrude from Waste Biomass with Bitumen-Derived Vacuum Gas Oil,ALVAREZ MAJMUTOV ANTON,4,,ENERGY & FUELS,NOV 2019,33,,,27,4.5,0,0,0,0,0,0,1,8,9,4,5
+Modeling the molecular composition of vacuum residue from oil sand bitumen,ALVAREZ MAJMUTOV ANTON,3,,FUEL,APR 1 2019,241,,,26,4.33,0,0,0,0,0,3,5,7,3,5,3
+Stochastic Modeling and Simulation Approach for Industrial Fixed Bed Hydrocrackers,ALVAREZ MAJMUTOV ANTON,2,,INDUSTRIAL & ENGINEERING CHEMISTRY RESEARCH,JUN 21 2017,56,,,20,2.5,0,0,0,0,0,4,2,2,6,4,2
+Deriving the Molecular Composition of Middle Distillates by Integrating Statistical Modeling with Advanced Hydrocarbon Characterization,ALVAREZ MAJMUTOV ANTON,6,,ENERGY & FUELS,DEC 2014,28,,,19,1.73,0,1,3,1,0,4,0,2,5,3,0
+Bitumen partial upgrading by mild hydroprocessing in a fixed-bed reactor,ALVAREZ MAJMUTOV ANTON,3,,FUEL,JAN 1 2019,235,,,18,3.0,0,0,0,0,0,2,3,6,1,3,3
+Co-Processing of Deoxygenated Pyrolysis Bio-Oil with Vacuum Gas Oil through Hydrocracking,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,JUN 17 2021,35,,,17,4.25,0,0,0,0,0,0,0,1,7,4,5
+Hydrogenation of Olefins in Bitumen-Derived Naphtha over a Commercial Hydrotreating Catalyst,ALVAREZ MAJMUTOV ANTON,4,,ENERGY & FUELS,MAY 2018,32,,,17,2.43,0,0,0,0,0,2,5,5,1,2,2
+Modeling and Simulation of a Multibed Industrial Hydrotreater with Vapor-Liquid Equilibrium,ALVAREZ MAJMUTOV ANTON,2,,INDUSTRIAL & ENGINEERING CHEMISTRY RESEARCH,JUL 2 2014,53,,,14,1.27,0,1,3,1,1,3,0,3,1,0,1
+Hydrotreatment of Olefins in Thermally Processed Bitumen under Mild Conditions,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,APR 2019,33,,,12,2.0,0,0,0,0,0,0,3,6,1,1,1
+Understanding bitumen partial upgrading through process modelling and simulation,ALVAREZ MAJMUTOV ANTON,4,,CANADIAN JOURNAL OF CHEMICAL ENGINEERING,JAN 2021,99,,,11,2.2,0,0,0,0,0,0,0,5,0,3,3
+Analyzing the energy intensity and greenhouse gas emission of Canadian oil sands crude upgrading through process modeling and simulation,ALVAREZ MAJMUTOV ANTON,2,,FRONTIERS OF CHEMICAL SCIENCE AND ENGINEERING,JUN 2014,8,,,11,1.0,0,0,2,0,0,4,1,2,0,2,0
+Isomerization catalysts and technologies for biorefining: Opportunities for producing sustainable aviation fuels,ALVAREZ MAJMUTOV ANTON,3,,FUEL,NOV 1 2023,351,,,9,4.5,0,0,0,0,0,0,0,0,0,4,5
+Mild hydrotreatment of biocrude derived from hydrothermal liquefaction of agriculture waste: improving biocrude miscibility with vacuum gas oil to aid co-processing,ALVAREZ MAJMUTOV ANTON,3,,BIOFUELS BIOPRODUCTS & BIOREFINING-BIOFPR,MAY 2022,16,,,9,3.0,0,0,0,0,0,0,0,0,1,4,4
+Development and Application of a Life Cycle-Based Model to Evaluate Greenhouse Gas Emissions of Oil Sands Upgrading Technologies,ALVAREZ MAJMUTOV ANTON,5,,ENVIRONMENTAL SCIENCE & TECHNOLOGY,DEC 20 2016,50,,,9,1.0,0,0,0,0,1,3,3,2,0,0,0
+Upgrading of Hydrothermal Liquefaction Biocrude from Forest Residues Using Solvents and Mild Hydrotreating for Use as Co-processing Feed in a Refinery,ALVAREZ MAJMUTOV ANTON,4,,ENERGY & FUELS,AUG 23 2023,37,,,8,4.0,0,0,0,0,0,0,0,0,0,1,7
+An overview on the analytical methods for characterization of biocrudes and their blends with petroleum,ALVAREZ MAJMUTOV ANTON,5,,FUEL,SEP 15 2022,324,,,7,2.33,0,0,0,0,0,0,0,0,1,4,2
+Molecular Characterization of Remnant Polarizable Asphaltene Fractions Upon Bitumen Upgrading and Possible Implications in Petroleum Viscosity,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,JUL 21 2022,36,,,6,2.0,0,0,0,0,0,0,0,0,0,5,1
+Production of Renewable Liquid Fuels by Coprocessing HTL Biocrude Using Hydrotreating and Fluid Catalytic Cracking,ALVAREZ MAJMUTOV ANTON,2,,ENERGY & FUELS,DEC 2 2021,35,,,6,1.5,0,0,0,0,0,0,0,0,1,2,3
+Enhanced Representation of Thermal Cracking Chemistry in the Context of Bitumen Partial Upgrading,ALVAREZ MAJMUTOV ANTON,3,,ENERGY & FUELS,AUG 5 2021,35,,,5,1.25,0,0,0,0,0,0,0,0,0,2,3
+Coprocessing Partially Hydrodeoxygenated Hydrothermal Liquefaction Biocrude from Forest Residue in the Vacuum Gas Oil Hydrocracking Process,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,AUG 23 2023,37,,,4,2.0,0,0,0,0,0,0,0,0,0,0,4
+Modeling and simulation of a multi-bed industrial reactor for renewable diesel hydroprocessing,ALVAREZ MAJMUTOV ANTON,3,,RENEWABLE ENERGY,MAR 2022,186,,,4,1.33,0,0,0,0,0,0,0,0,1,3,0
+Process modelling and simulation of bitumen partial upgrading: Analysis of solvent deasphalting-thermal cracking configuration,ALVAREZ MAJMUTOV ANTON,3,,CANADIAN JOURNAL OF CHEMICAL ENGINEERING,JUL 2022,100,,,4,1.0,0,0,0,0,0,0,0,0,1,1,2
+Bitumen partial upgrading through fixed-bed hydroprocessing: Examining catalyst stability,ALVAREZ MAJMUTOV ANTON,4,,FUEL,MAR 1 2021,287,,,4,1.0,0,0,0,0,0,0,0,2,0,1,1
+Enhancing Efficiency of Coprocessing Forest Residue Derived HTL Biocrude with Vacuum Gas Oil: An Integrated Pretreatment Approach,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,MAR 27 2024,38,,,2,2.0,0,0,0,0,0,0,0,0,0,0,2
+Exploring the Conversion Limits of Bitumen Visbreaking through a Molecular Reaction Model,ALVAREZ MAJMUTOV ANTON,1,,ENERGY & FUELS,AUG 26 2023,37,,,2,1.0,0,0,0,0,0,0,0,0,0,0,2
+Characterizing Variability in Oil Sands Upgrading Greenhouse Gas Emissions Intensity,ALVAREZ MAJMUTOV ANTON,5,,ENERGY & FUELS,SEP 2019,33,,,2,0.33,0,0,0,0,0,0,1,1,0,0,0
+Impacts of Refining Partially Upgraded Bitumen: Vacuum Gas Oil Hydrotreating,ALVAREZ MAJMUTOV ANTON,6,,ENERGY & FUELS,MAY 24 2024,38,,,1,1.0,0,0,0,0,0,0,0,0,0,0,1
+Evolutionary process synthesis for methane liquefaction,ALVAREZ MAJMUTOV ANTON,2,,REVISTA MEXICANA DE INGENIERIA QUIMICA,APR 2007,6,,,1,0.06,1,0,0,0,0,0,0,0,0,0,0
+Coprocessing Hydrothermal Liquefaction Biocrude from Algae with Vacuum Gas Oil Using Hydrotreating,ALVAREZ MAJMUTOV ANTON,6,,ENERGY & FUELS,AUG 1 2024,38,,,0,0.0,0,0,0,0,0,0,0,0,0,0,0
+"Self-assembly and solubility properties of polyaromatic compounds studied by molecular dynamics simulation (vol 277, 118060, 2020)",ALVAREZ MAJMUTOV ANTON,13,,FUEL,MAY 1 2021,291,,,0,0.0,0,0,0,0,0,0,0,0,0,0,0

@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2021
+Experimental and numerical analysis of failure in flexible pipe by a mechanism of intentional damage,HERNANDEZ ROJO MARCO ANTONIO,4,,JOURNAL OF MECHANICAL SCIENCE AND TECHNOLOGY,MAY 2020,34,,,1,0.2,1

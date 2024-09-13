@@ -1,0 +1,6 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2016,2017,2018,2019,2020,2021,2022,2023,2024
+Design and analysis of a dead volume control for a solar Stirling engine with induction generator,LEAL CHAVEZ DANIEL ARTURO,5,,ENERGY,DEC 15 2015,93,,,42,4.2,1,3,3,3,9,13,6,2,2
+High ionic conductivity dysprosium and tantalum Co-doped bismuth oxide electrolyte for low-temperature SOFCs,LEAL CHAVEZ DANIEL ARTURO,8,,IONICS,SEP 2020,26,,,22,4.4,0,0,0,0,0,3,3,11,5
+A numerical study of the influence of design variable interactions on the performance of a Stirling engine System,LEAL CHAVEZ DANIEL ARTURO,6,,APPLIED THERMAL ENGINEERING,APR 2020,170,,,7,1.4,0,0,0,0,2,1,1,2,1
+Numerical Simulation of Direct Solar Vapor Generation of Acetone for an Organic Rankine Cycle Using an Evacuated Tube Collector,LEAL CHAVEZ DANIEL ARTURO,4,,JOURNAL OF SOLAR ENERGY ENGINEERING-TRANSACTIONS OF THE ASME,APR 1 2021,143,,,6,1.5,0,0,0,0,0,0,4,1,1
+Design and Analysis of the Domestic Micro-Cogeneration Potential for an ORC System Adapted to a Solar Domestic Hot Water System,LEAL CHAVEZ DANIEL ARTURO,5,,ENTROPY,SEP 2019,21,,,6,1.0,0,0,0,0,1,1,3,1,0

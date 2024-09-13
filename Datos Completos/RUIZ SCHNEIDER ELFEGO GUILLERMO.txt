@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year
+Gianfranco Bisiacchi Giraldi 1947-2006 - Obituary,RUIZ SCHNEIDER ELFEGO GUILLERMO,1,,REVISTA MEXICANA DE ASTRONOMIA Y ASTROFISICA,OCT 2007,43,,,0,0.0

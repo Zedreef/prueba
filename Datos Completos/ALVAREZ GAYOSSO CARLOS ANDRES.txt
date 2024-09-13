@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2022,2023,2024
+Synthesis of PLA/SBA-15 Composite Scaffolds for Bone Tissue Engineering,ALVAREZ GAYOSSO CARLOS ANDRES,9,,MATERIALS RESEARCH-IBERO-AMERICAN JOURNAL OF MATERIALS,2020,23,,,5,1.0,1,2,2

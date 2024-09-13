@@ -1,0 +1,12 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2018,2019,2020,2021,2022,2023,2024
+Thermal Conductivity of Nanocomposites Based in High Density Polyethylene and Surface Modified Hexagonal Boron Nitride via Cold Ethylene Plasma,NEIRA VELAZQUEZ MARIA GUADALUPE,6,,PLASMA CHEMISTRY AND PLASMA PROCESSING,MAR 2018,38,,,16,2.29,0,2,3,2,5,3,1
+Surface Modification of Sodium Montmorillonite Nanoclay by Plasma Polymerization and Its Effect on the Properties of Polystyrene Nanocomposites,NEIRA VELAZQUEZ MARIA GUADALUPE,9,,JOURNAL OF NANOMATERIALS,2018,2018,,,10,1.43,0,1,2,2,3,2,0
+Surface Modification of Carbon Nanofibers and Graphene Platelets Mixtures by Plasma Polymerization of Propylene,NEIRA VELAZQUEZ MARIA GUADALUPE,8,,JOURNAL OF NANOMATERIALS,2017,2017,,,8,1.0,1,0,3,1,1,1,1
+Fully Bio-Based Elastomer Nanocomposites Comprising Polyfarnesene Reinforced with Plasma-Modified Cellulose Nanocrystals,NEIRA VELAZQUEZ MARIA GUADALUPE,8,,POLYMERS,AUG 2021,13,,,5,1.25,0,0,0,0,3,0,2
+"Vasorelaxant and Antioxidant Activity of Some Medicinal Plants from Campeche, Mexico",NEIRA VELAZQUEZ MARIA GUADALUPE,8,,PHARMACOGNOSY MAGAZINE,JAN-MAR 2021,17,,,3,0.75,0,0,0,0,0,2,1
+Thermal conductivity of high density polyethylene: Cold plasma modified graphite composites,NEIRA VELAZQUEZ MARIA GUADALUPE,13,,POLYMER COMPOSITES,NOV 2019,40,,,3,0.5,0,0,1,2,0,0,0
+Carbon nanostructures synthesis by catalyst-free atmospheric pressure plasma jet,NEIRA VELAZQUEZ MARIA GUADALUPE,7,,JOURNAL OF PHYSICS D-APPLIED PHYSICS,AUG 9 2024,57,,,0,0.0,0,0,0,0,0,0,0
+Minimum inhibitory but maximum non-hemolytic concentration of plasma-treated catheters coated with <i>L. tridentata</i> and <i>O. vulgare</i> extracts,NEIRA VELAZQUEZ MARIA GUADALUPE,7,,PLASMA SCIENCE & TECHNOLOGY,DEC 1 2023,25,,,0,0.0,0,0,0,0,0,0,0
+Preparation and evaluation of (R)-(-)-carvone-doped polymeric resins as potential antibacterial dental materials,NEIRA VELAZQUEZ MARIA GUADALUPE,7,,JOURNAL OF THE MECHANICAL BEHAVIOR OF BIOMEDICAL MATERIALS,NOV 2023,147,,,0,0.0,0,0,0,0,0,0,0
+"Obtaining and characterization of bioplastics based on potato starch, aloe, and graphene",NEIRA VELAZQUEZ MARIA GUADALUPE,5,,POLIMEROS-CIENCIA E TECNOLOGIA,2022,32,,,0,0.0,0,0,0,0,0,0,0
+PLASMA MODIFICATION AND DISPERSION OF MULTIWALLED CARBON NANOTUBES (MWCNT) IN HIGH IMPACT POLYSTYRENE BASED NANOCOMPOSITES: ANALYSIS BY ELECTRON MICROSCOPY (TEM AND SEM),NEIRA VELAZQUEZ MARIA GUADALUPE,7,,ACTA MICROSCOPICA,2014,23,,,0,0.0,0,0,0,0,0,0,0

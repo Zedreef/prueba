@@ -1,0 +1,3 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2000,2001,2003,2004,2007,2008,2010,2013,2018,2020,2021
+Isolation of an Entamoeba histolytica intracellular alkaline phospholipase A<sub>2</sub>,ALAGON CANO ALEJANDRO,6,,PARASITOLOGY RESEARCH,APR 1998,84.0,,,20,0.74,4,3,1,2,1,1,1,3,1,2,1
+Independent large-scale lots of anti-thyroid-stimulating hormone monoclonal antibody manufactured <i>in vitro</i> contain identical quality,ALAGON CANO ALEJANDRO,3,"Kalil, J; CunhaNeto, E; Rizzo, LV",13TH INTERNATIONAL CONGRESS OF IMMUNOLOGY,2007,,13th International Congress of Immunology,"AUG 21-25, 2007",0,0.0,0,0,0,0,0,0,0,0,0,0,0

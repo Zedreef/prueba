@@ -1,0 +1,4 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2021,2022,2023
+Chain-End Functional di-Sorbitan Oleate Monomer Obtained from Renewable Resources as Precursors for Bio-Based Polyurethanes,ROJAS GARCIA JOSE MANUEL,5,,JOURNAL OF POLYMERS AND THE ENVIRONMENT,MAY 2020,28,,,3,0.6,1,1,1
+Optimizing cellulose fraction for enhanced utility: Comparative pre-treatment of<i> Agave</i><i> tequilana</i> Weber var. blue bagasse fiber for sustainable applications,ROJAS GARCIA JOSE MANUEL,5,,HELIYON,APR 30 2024,10,,,0,0.0,0,0,0
+Synthesis and characterization of starch nanoparticles obtained through the micro-emulsion method,ROJAS GARCIA JOSE MANUEL,6,,MRS ADVANCES,APR 2023,8,,,0,0.0,0,0,0

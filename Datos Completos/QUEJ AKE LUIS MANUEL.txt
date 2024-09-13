@@ -1,0 +1,11 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2018,2019,2020,2021,2022,2023,2024
+"Analysis of the Physicochemical, Mechanical, and Electrochemical Parameters and Their Impact on the Internal and External SCC of Carbon Steel Pipelines",QUEJ AKE LUIS MANUEL,6,,MATERIALS,DEC 2020,13,,,13,2.6,0,0,0,3,3,4,3
+Electrochemical study of the corrosion rate of API steels in clay soils,QUEJ AKE LUIS MANUEL,3,,ANTI-CORROSION METHODS AND MATERIALS,2017,64,,,12,1.5,2,1,3,1,4,1,0
+Electrochemical study on the corrosion rate of X52 steel exposed to different soils,QUEJ AKE LUIS MANUEL,2,,ANTI-CORROSION METHODS AND MATERIALS,2018,65,,,11,1.57,0,0,5,0,3,2,1
+The effect of non-ionic surfactant on the internal corrosion for X52 steel in extra-heavy crude oil-in-water emulsions,QUEJ AKE LUIS MANUEL,3,,ANTI-CORROSION METHODS AND MATERIALS,2018,65,,,10,1.43,0,2,2,2,2,1,1
+Assessment on external corrosion rates for API pipeline steels exposed to acidic sand-clay soil,QUEJ AKE LUIS MANUEL,5,,ANTI-CORROSION METHODS AND MATERIALS,2018,65,,,10,1.43,0,0,1,3,4,2,0
+The effect of the hydrodynamic and temperature on corrosion rate of API steels exposed to oilfield produced water,QUEJ AKE LUIS MANUEL,5,,ANTI-CORROSION METHODS AND MATERIALS,JAN 7 2019,66,,,5,0.83,0,0,2,0,1,1,1
+STRESS-CORROSION-CRACKING ASSESSMENT OF X52 PIPELINE STEEL EXPOSED TO MEXICAN SOILS,QUEJ AKE LUIS MANUEL,5,,MATERIALI IN TEHNOLOGIJE,2019,53,,,4,0.67,0,0,1,1,1,0,1
+Assessment of corrosivity of emulsions from a petroleum sample on X80 steel,QUEJ AKE LUIS MANUEL,5,,ANTI-CORROSION METHODS AND MATERIALS,FEB 18 2022,69,,,3,1.0,0,0,0,0,0,2,1
+Corrosion testing of X52 and X80 steels immersed in stimulated emulsions using a real petroleum sample,QUEJ AKE LUIS MANUEL,3,,PETROLEUM RESEARCH,JUN 2024,9,,,0,0.0,0,0,0,0,0,0,0
+Electrochemical and Gravimetric Study on Corrosion Inhibition of Carbon Steels Exposed to Oilfield Produced Water,QUEJ AKE LUIS MANUEL,3,,JOURNAL OF THE MEXICAN CHEMICAL SOCIETY,2023,67,,,0,0.0,0,0,0,0,0,0,0

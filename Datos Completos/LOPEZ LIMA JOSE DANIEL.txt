@@ -1,0 +1,2 @@
+Title,Authors,Corporate Authors,Book Editors,Source Title,Publication Date,Volume,Conference Title,Conference Date,Total Citations,Average per Year,2020,2023
+Integrated management reduces <i>Globodera rostochiensis</i> abundance and enhances nematode community composition,LOPEZ LIMA JOSE DANIEL,3,,ARCHIVES OF AGRONOMY AND SOIL SCIENCE,2018,64,,,2,0.29,1,1
