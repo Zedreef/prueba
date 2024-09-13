@@ -56,12 +56,14 @@ def procesar_estadisticas_autores(ruta_final):
 # ----------------------- Definicion -------------------------------------------
 
 # Definir las rutas
-ruta_guardado = "/content/drive/MyDrive/Investigadores IA/Archivos Limpios"
-ruta_final = '/content/drive/MyDrive/Investigadores IA/Datos Para Analizar/Publicaciones.csv'
+ruta_guardado = '/workspaces/prueba/Datos Completos'
+ruta_Publicaciones = 'Analisis/Publicaciones.csv'
+#ruta_guardado = "/content/drive/MyDrive/Investigadores IA/Archivos Limpios"
+#ruta_final = '/content/drive/MyDrive/Investigadores IA/Datos Para Analizar/Publicaciones.csv'
 
 # Procesar los archivos
 correctos, incorrectos, archivos_incorrectos = procesar_archivos(ruta_guardado)
-author_stats = procesar_estadisticas_autores(ruta_final)
+author_stats = procesar_estadisticas_autores(ruta_Publicaciones)
 
 # Filtrar y ordenar los datos de los autores
 min_articles = 1
