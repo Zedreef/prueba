@@ -197,13 +197,13 @@ if selected == "Buscar Investigador":
   # Función para procesar los datos del autor seleccionado
   def procesar_autor(df, autor_seleccionado):
       # Filtrar el DataFrame por el autor seleccionado
-      df_filtrado = df[df['Authors'] == autor_seleccionado]
+      df_filtrado = df[df['Authors'] == autor_seleccionado].copy()
 
       # Mantener solo las columnas específicas que te interesan
       columnas_especificas = ['Title', 'Authors', 'Source Title', 'Publication Date', 'Total Citations', 'Average per Year']
       df_filtrado = df_filtrado[columnas_especificas]
 
-      # Filtrar columnas de años dinámicamente (desde 1900 hasta el año más reciente en los datos)
+      # Filtrar columnas de años dinámicamente (desde 1960 hasta el año más reciente en los datos)
       columnas_de_años = [col for col in df.columns if col.isdigit() and int(col) >= 1960]
 
       # Mantener solo las columnas de años que no son completamente NaN o 0
@@ -212,13 +212,16 @@ if selected == "Buscar Investigador":
       # Combinar las columnas específicas con las columnas de años válidas
       df_final = pd.concat([df_filtrado, df[columnas_de_años_validas]], axis=1)
 
+      # Eliminar cualquier fila que esté completamente vacía
+      df_final = df_final.dropna(how='all')
+
       return df_final
 
   # Cargar el archivo CSV en un DataFrame
   df_publicaciones = pd.read_csv(ruta_Publicaciones)
 
-  # Eliminar autores repetidos
-  autores_unicos = df_publicaciones['Authors'].drop_duplicates()
+  # Eliminar autores repetidos y ordenarlos alfabéticamente
+  autores_unicos = df_publicaciones['Authors'].drop_duplicates().sort_values()
 
   # Configuración de la app en Streamlit
   st.title("Análisis de Publicaciones")
@@ -236,7 +239,7 @@ if selected == "Buscar Investigador":
           st.write(f"Datos procesados para {autor_seleccionado}:")
           st.dataframe(df_resultado)
 
-          # Calcular la suma de 'Total Citations' y 'Average per Year'
+          # Calcular la suma de 'Total Citations' y el promedio de 'Average per Year'
           total_citations = df_resultado['Total Citations'].sum()
           average_per_year = df_resultado['Average per Year'].mean()
 
@@ -254,4 +257,3 @@ if selected == "Buscar Investigador":
 
       except Exception as e:
           st.error(f"Error procesando los datos: {e}")
-
