@@ -228,17 +228,20 @@ if selected == "Buscar Investigador":
       columnas_de_años = [col for col in df_autor.columns if col.isdigit() and int(col) >= 1960]
       
       # Crear DataFrame para Publicaciones y Citas
-      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()
-      citas_por_año = df_autor[columnas_de_años].sum()
+      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()  # Número de publicaciones (conteo de > 0 por año)
+      citas_por_año = df_autor[columnas_de_años].sum()  # Total de citas por año
       
-      # Crear la gráfica de líneas con Plotly
+      # Obtener el valor máximo para escalar ejes
+      max_publicaciones = publicaciones_por_año.max()
+      max_citas = citas_por_año.max()
+      
+      # Crear la gráfica con Plotly
       fig = go.Figure()
 
-      # Agregar la línea para las publicaciones (Eje izquierdo)
-      fig.add_trace(go.Scatter(
+      # Agregar las barras para las publicaciones (Eje izquierdo)
+      fig.add_trace(go.Bar(
           x=columnas_de_años,
           y=publicaciones_por_año,
-          mode='lines+markers',
           name='Publications',
           yaxis='y1'
       ))
@@ -258,12 +261,14 @@ if selected == "Buscar Investigador":
           xaxis_title='Year',
           yaxis=dict(
               title='Publications',
-              side='left'
+              side='left',
+              range=[0, max_publicaciones + 1]  # Autoescalado para publicaciones
           ),
           yaxis2=dict(
               title='Times Cited',
               overlaying='y',
-              side='right'
+              side='right',
+              range=[0, max_citas + 1]  # Autoescalado para citas
           ),
           legend=dict(
               orientation="h",
@@ -271,8 +276,7 @@ if selected == "Buscar Investigador":
               y=1.02,
               xanchor="right",
               x=1
-          ),
-          barmode='stack'
+          )
       )
 
       # Mostrar la gráfica en Streamlit
