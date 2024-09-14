@@ -311,10 +311,11 @@ if selected == "Buscar Investigador":
           df_resultado = procesar_autor(df_publicaciones, autor_seleccionado)
           
           # Mostrar el DataFrame resultante
-          st.write(f"Datos procesados para {autor_seleccionado}:")
+          st.write(f"Datos de {autor_seleccionado}: ")
           st.dataframe(df_resultado)
           
           # Calcular y mostrar el resumen
+          st.write(f"Metrica de citas: ")
           df_resumen = calcular_resumen(df_resultado)
           st.table(df_resumen)
 
