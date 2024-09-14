@@ -228,8 +228,8 @@ if selected == "Buscar Investigador":
       columnas_de_años = [col for col in df_autor.columns if col.isdigit() and int(col) >= 1960]
       
       # Crear DataFrame para Publicaciones y Citas
-      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()  # Número de publicaciones (conteo de > 0 por año)
-      citas_por_año = df_autor[columnas_de_años].sum()  # Total de citas por año
+      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()
+      citas_por_año = df_autor[columnas_de_años].sum()
       
       # Crear la gráfica de líneas con Plotly
       fig = go.Figure()
@@ -271,7 +271,8 @@ if selected == "Buscar Investigador":
               y=1.02,
               xanchor="right",
               x=1
-          )
+          ),
+          barmode='stack'
       )
 
       # Mostrar la gráfica en Streamlit
