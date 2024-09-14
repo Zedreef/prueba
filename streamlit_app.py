@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import re
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -224,12 +225,23 @@ if selected == "Buscar Investigador":
 
   # Función para graficar las citas y publicaciones por año
   def graficar_citas_publicaciones(df_autor, autor_seleccionado):
-      # Extraer los años de las columnas y convertirlas en formato numérico
-      columnas_de_años = [col for col in df_autor.columns if col.isdigit() and int(col) >= 1960]
+      # Extraer el año de 'Publication Date' usando una expresión regular para capturar solo el año
+      df_autor['Year'] = df_autor['Publication Date'].apply(lambda x: re.search(r'\d{4}', str(x)).group() if re.search(r'\d{4}', str(x)) else None)
       
-      # Crear DataFrame para Publicaciones y Citas
-      publicaciones_por_año = (df_autor[columnas_de_años] > 0).sum()  # Número de publicaciones (conteo de > 0 por año)
-      citas_por_año = df_autor[columnas_de_años].sum()  # Total de citas por año
+      # Eliminar las filas donde no se pudo extraer un año válido
+      df_autor = df_autor[df_autor['Year'].notna()].copy()
+      
+      # Convertir la columna 'Year' a entero
+      df_autor['Year'] = df_autor['Year'].astype(int)
+      
+      # Agrupar por el año y contar el número de publicaciones
+      publicaciones_por_año = df_autor.groupby('Year').size()  # Número de publicaciones por año
+      
+      # Agrupar por el año y sumar el total de citas
+      citas_por_año = df_autor.groupby('Year')['Total Citations'].sum()  # Total de citas por año
+      
+      # Obtener los años únicos para la gráfica
+      años = sorted(publicaciones_por_año.index)
       
       # Obtener el valor máximo para escalar ejes
       max_publicaciones = publicaciones_por_año.max()
@@ -240,7 +252,7 @@ if selected == "Buscar Investigador":
 
       # Agregar las barras para las publicaciones (Eje izquierdo)
       fig.add_trace(go.Bar(
-          x=columnas_de_años,
+          x=años,
           y=publicaciones_por_año,
           name='Publications',
           yaxis='y1'
@@ -248,7 +260,7 @@ if selected == "Buscar Investigador":
 
       # Agregar la línea para las citas (Eje derecho)
       fig.add_trace(go.Scatter(
-          x=columnas_de_años,
+          x=años,
           y=citas_por_año,
           mode='lines+markers',
           name='Times Cited',
