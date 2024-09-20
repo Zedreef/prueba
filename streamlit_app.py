@@ -11,6 +11,7 @@ from io import StringIO
 # Librerías de análisis de datos y matemáticas
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
 # Librerías de grafos y comunidades
 import networkx as nx
@@ -83,15 +84,15 @@ def procesar_estadisticas_autores(ruta_final):
 # ----------------------- Definición -------------------------------------------
 # Definir las rutas
 # ----------------------- Ruta App ---------------------------------------------
-# ruta_brutos = '/mount/src/prueba/Datos Brutos'
-# ruta_guardado = '/mount/src/prueba/Datos Completos'
-# ruta_Publicaciones = 'Analisis/Publicaciones.csv'
-# ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
-# ----------------------- Ruta GitHub ------------------------------------------
-ruta_brutos = '/workspaces/prueba/Datos Brutos'
-ruta_guardado = '/workspaces/prueba/Datos Completos'
+ruta_brutos = '/mount/src/prueba/Datos Brutos'
+ruta_guardado = '/mount/src/prueba/Datos Completos'
 ruta_Publicaciones = 'Analisis/Publicaciones.csv'
 ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
+# ----------------------- Ruta GitHub ------------------------------------------
+# ruta_brutos = '/workspaces/prueba/Datos Brutos'
+# ruta_guardado = '/workspaces/prueba/Datos Completos'
+# ruta_Publicaciones = 'Analisis/Publicaciones.csv'
+# ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
 # -------------------------------------------------------------------------------
 # Procesar los archivos
 correctos, incorrectos, archivos_incorrectos = procesar_archivos(ruta_guardado)
@@ -742,87 +743,142 @@ if selected == "Análisis de patentes":
     df_patentes = pd.read_csv(ruta_Patentes, encoding='latin1')
     df_publicaciones = pd.read_csv(ruta_Publicaciones)
 
-    # Procesar la fecha de patente para convertirla en formato datetime (sin la hora)
-    df_patentes['Filing Date'] = pd.to_datetime(df_patentes['Filing Date'], format='%d/%m/%Y').dt.normalize()
-
-    # Normalizar los nombres de inventores/autores
+    # Función para normalizar nombres
     def normalizar_nombre(nombre):
-        nombre = unicodedata.normalize('NFKD', nombre).encode('ascii', 'ignore').decode('utf-8').upper()
-        return nombre
+        return unicodedata.normalize('NFKD', nombre).encode('ascii', 'ignore').decode('utf-8').upper()
+    
+    # Procesar las fechas de publicación en diferentes formatos
+    def procesar_fecha_publicacion(fecha):
+        if pd.isnull(fecha):
+            return pd.NaT  # Manejar valores nulos
+
+        fecha = str(fecha).strip().upper()  # Convertir a mayúsculas y quitar espacios
+
+        # Expresión regular para identificar formatos complejos
+        if "JAN-FEB" in fecha:
+            # Manejar el rango de meses como una fecha arbitraria del primer mes
+            return pd.to_datetime("01 " + fecha.split('-')[0] + " 2000", format='%d %b %Y', errors='coerce')
+
+        try:
+            if re.match(r'^\w{3} \d{1,2}, \d{4}$', fecha):
+                # Formato: "DEC 28, 2015"
+                return pd.to_datetime(fecha, format='%b %d, %Y', errors='coerce')
+            elif re.match(r'^\w{3} \d{1,2} \d{4}$', fecha):
+                # Formato: "MAY 3 2017"
+                return pd.to_datetime(fecha, format='%b %d %Y', errors='coerce')
+            elif re.match(r'^\w{3} \d{4}$', fecha):
+                # Formato: "FEB 2020"
+                return pd.to_datetime(fecha, format='%b %Y', errors='coerce')
+            elif re.match(r'^\d{1,2} \w{3} \d{4}$', fecha):
+                # Formato: "28 DEC 2015"
+                return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
+            elif re.match(r'^\w{3} \d{2}$', fecha):
+                # Formato: "JAN 20" (asumiendo que el año es actual)
+                return pd.to_datetime(fecha + ' ' + str(pd.datetime.now().year), format='%b %y', errors='coerce')
+            else:
+                # Formato no reconocido
+                return pd.NaT
+        except Exception as e:
+            return pd.NaT
+
+    # Función para calcular publicaciones antes y después de cada patente
+    def calcular_publicaciones(df, fecha_patente, autor):
+        antes = df[(df['Authors'] == autor) & (df['Publication Date'] < fecha_patente)]
+        despues = df[(df['Authors'] == autor) & (df['Publication Date'] >= fecha_patente)]
+        return len(antes), len(despues)
+
+    # Función para agregar líneas de tendencia
+    def agregar_tendencia(datos, fig, name, color, dash):
+        if len(datos) > 1:
+            X = datos['Año'].values.reshape(-1, 1)
+            y = datos['Publicaciones'].values
+            modelo = LinearRegression().fit(X, y)
+            predicciones = modelo.predict(X)
+            agregar_trazado(fig, datos['Año'], predicciones, name, color, dash)
+
+    # Función para agregar trazados en la gráfica
+    def agregar_trazado(fig, x, y, name, color, dash='solid'):
+        fig.add_trace(go.Scatter(x=x, y=y, mode='lines+markers', name=name, marker=dict(color=color), line=dict(color=color, dash=dash)))
+
+    start_time = time.time()
+
+    # Procesar la fecha de patente y normalizar inventores/autores
+    df_patentes['Filing Date'] = pd.to_datetime(df_patentes['Filing Date'], format='%d/%m/%Y', dayfirst=True).dt.normalize()
 
     df_patentes['Inventor'] = df_patentes['Inventor'].apply(normalizar_nombre)
     df_publicaciones['Authors'] = df_publicaciones['Authors'].apply(normalizar_nombre)
 
-    # Procesar las fechas de publicación en diferentes formatos
-    def procesar_fecha_publicacion(fecha):
-        fecha = str(fecha).upper()  # Convertir todo a mayúsculas por consistencia
-        try:
-            # Intentar procesar los casos que solo tienen año
-            if len(fecha) == 4:
-                return pd.to_datetime(fecha, format='%Y')
-            # Procesar casos con "mes y año"
-            elif any(mes in fecha for mes in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']):
-                return pd.to_datetime(fecha, format='%b %Y', errors='coerce')
-            # Procesar casos con "día, mes y año"
-            else:
-                return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
-        except Exception as e:
-            return pd.NaT
-
     df_publicaciones['Publication Date'] = df_publicaciones['Publication Date'].apply(procesar_fecha_publicacion)
 
-    # Eliminar duplicados en las patentes por autor
+    # Eliminar duplicados en patentes
     df_patentes_unique = df_patentes.drop_duplicates(subset=['Inventor', 'Filing Date'])
 
-    # Función para calcular el total de publicaciones antes y después de la fecha de patente por autor
-    def calcular_publicaciones_por_autor(df_publicaciones, fecha_patente, autor):
-        publicaciones_antes = df_publicaciones[
-            (df_publicaciones['Authors'] == autor) & 
-            (df_publicaciones['Publication Date'] < fecha_patente)
-        ]
-        publicaciones_despues = df_publicaciones[
-            (df_publicaciones['Authors'] == autor) & 
-            (df_publicaciones['Publication Date'] >= fecha_patente)
-        ]
-        return len(publicaciones_antes), len(publicaciones_despues)
-    
-    start_time = time.time()
-
-    # Agregar las columnas de publicaciones antes y después por cada patente
+    # Aplicar cálculo de publicaciones
     df_patentes_unique[['Publicaciones antes', 'Publicaciones después']] = df_patentes_unique.apply(
-        lambda row: calcular_publicaciones_por_autor(df_publicaciones, row['Filing Date'], row['Inventor']), axis=1, result_type='expand'
+        lambda row: calcular_publicaciones(df_publicaciones, row['Filing Date'], row['Inventor']),
+        axis=1, result_type='expand'
     )
 
-    # Calcular la diferencia de publicaciones antes y después
+    # Calcular cambio en publicaciones
     df_patentes_unique['Cambio en Publicaciones'] = df_patentes_unique['Publicaciones después'] - df_patentes_unique['Publicaciones antes']
 
-    # Mostrar resultados
-    st.subheader("Análisis de Patentes y Publicaciones Científicas")
+    # Selección del autor
+    autor_seleccionado = st.selectbox("Seleccione un autor", df_patentes_unique['Inventor'].unique())
 
-    # Selección del autor por el usuario
-    autores_unicos = df_patentes_unique['Inventor'].unique()
-    autor_seleccionado = st.selectbox("Seleccione un autor", autores_unicos)
-
-    # Filtrar el DataFrame por el autor seleccionado
+    # Filtrar por autor seleccionado
     df_autor = df_patentes_unique[df_patentes_unique['Inventor'] == autor_seleccionado]
+    df_autor_publicaciones = df_publicaciones[df_publicaciones['Authors'] == autor_seleccionado]
 
-    # Gráfico de barras para visualizar el cambio en publicaciones
-    fig = px.bar(df_autor, x='Inventor', y=['Publicaciones antes', 'Publicaciones después'],
-                 title=f'Publicaciones antes y después de la patente para {autor_seleccionado}')
+    # Agrupar publicaciones por año
+    df_autor_publicaciones['Año'] = df_autor_publicaciones['Publication Date'].dt.year
+    publicaciones_por_año = df_autor_publicaciones.groupby('Año').size().reset_index(name='Publicaciones')
 
+    # Agrupar patentes por año
+    df_autor['Año'] = df_autor['Filing Date'].dt.year
+    patentes_por_año = df_autor.groupby('Año').size().reset_index(name='Patentes')
+
+    # Asegúrate de que estas líneas estén antes de mostrar los datos en la tabla
+    df_autor['Filing Date'] = df_autor['Filing Date'].dt.date
+    df_autor_publicaciones['Publication Date'] = df_autor_publicaciones['Publication Date'].dt.date
+
+    # Unir datos de publicaciones y patentes
+    datos_combinados = pd.merge(publicaciones_por_año, patentes_por_año, on='Año', how='outer').fillna(0)
+
+    # Encontrar el año con más patentes
+    año_con_mas_patentes = patentes_por_año.loc[patentes_por_año['Patentes'].idxmax(), 'Año']
+
+    # Crear figura
+    fig = go.Figure()
+
+    # Agregar publicaciones y patentes
+    agregar_trazado(fig, datos_combinados['Año'], datos_combinados['Publicaciones'], 'Publicaciones', 'blue')
+    agregar_trazado(fig, datos_combinados['Año'], datos_combinados['Patentes'], 'Patentes', 'orange')
+
+    # Añadir línea vertical para el año con más patentes
+    fig.add_vline(x=año_con_mas_patentes, line_dash="dash", line_color="red", annotation_text=f"Año con más patentes: {año_con_mas_patentes}")
+
+    # Agregar título a la gráfica
+    fig.update_layout(title=f"Tendencia de Publicaciones y Patentes de {autor_seleccionado} a lo Largo del Tiempo")
+
+    # Dividir datos antes y después del año con más patentes
+    datos_antes = datos_combinados[datos_combinados['Año'] < año_con_mas_patentes]
+    datos_despues = datos_combinados[datos_combinados['Año'] >= año_con_mas_patentes]
+
+    # Agregar tendencias antes y después del año con más patentes
+    agregar_tendencia(datos_antes, fig, "Tendencia publicaciones antes", 'red', 'dash')
+    agregar_tendencia(datos_despues, fig, "Tendencia publicaciones después", 'green', 'solid')
+
+    # Mostrar gráfica
     st.plotly_chart(fig)
 
-    # Gráfico de dispersión para visualizar la correlación entre patentes y publicaciones
-    fig2 = px.scatter(df_autor, x='Publicaciones antes', y='Publicaciones después',
-                      title=f'Correlación entre publicaciones antes y después de la patente para {autor_seleccionado}')
+    # Mostrar resumen de publicaciones y patentes
+    st.write("Resumen de publicaciones y patentes de ", autor_seleccionado)
 
-    st.plotly_chart(fig2)
-
-    # Mostrar resumen de resultados
-    st.write("Resumen:")
-    st.write(df_autor[['Inventor', 'Patent', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']])
+    # Mostrar la tabla ajustada al tamaño del contenedor
+    st.dataframe(df_autor[['Inventor', 'Patent', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']], use_container_width=True)
 
 
+    # Calcular el tiempo de ejecución
     end_time = time.time()
     st.write(f"Tiempo de ejecución: {end_time - start_time} segundos")
 # -------------------------------------------------------------------------------
