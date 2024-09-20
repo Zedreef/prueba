@@ -128,9 +128,6 @@ with st.sidebar:
         menu_icon="clipboard-data-fill",
         default_index=0
     )
-    st.text("User: Adrian fdz")
-    st.text("Version: 0.0.1")
-
 # -------------------------------------------------------------------------------
 
 # ---------------------- Dashboard principal ------------------------------------
