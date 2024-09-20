@@ -164,7 +164,9 @@ if selected == "Inicio":
                  height=400)
 
     st.plotly_chart(fig)
-
+# -------------------------------------------------------------------------------
+    
+# --------------------- Buscar Investigador -------------------------------------
 if selected == "Buscar Investigador":
     # Función para procesar los datos del autor seleccionado
     def procesar_autor(df, autor_seleccionado):
@@ -343,7 +345,7 @@ if selected == "Buscar Investigador":
             st.error(f"Error procesando los datos: {e}")
 # -------------------------------------------------------------------------------
 
-# ----------------Comparación de autores------------------------------------------
+# ----------------Comparación de autores-----------------------------------------
 if selected == "Comparar investigadores":
     # Función para procesar los datos filtrados por rango de fechas
     def procesar_autores(df, cantidad_autores, fecha_inicio, fecha_fin):
@@ -515,7 +517,7 @@ if selected == "Comparar investigadores":
 # -------------------------------------------------------------------------------
 
 
-# --------Número de Artículos y Citas Totales por Autor--------------------------
+# -------- Número de Artículos y Citas Totales por Autor ------------------------
 if selected == "Todos los investigadores":
     st.subheader("Todos los investigadores")
     fig = go.Figure()
@@ -571,7 +573,7 @@ if selected == "Todos los investigadores":
     st.plotly_chart(fig)
 # -------------------------------------------------------------------------------
 
-# ---------------------------Análisis de Coautoría-------------------------------
+# -------------------------- Análisis de Coautoría ------------------------------
 
 if selected == "Análisis de Coautoría":
 
@@ -878,4 +880,8 @@ if selected == "Análisis de patentes":
     # Calcular el tiempo de ejecución
     end_time = time.time()
     st.write(f"Tiempo de ejecución: {end_time - start_time} segundos")
+# -------------------------------------------------------------------------------
+
+# ---------------------- Análisis de conferencias- ------------------------------
+
 # -------------------------------------------------------------------------------
