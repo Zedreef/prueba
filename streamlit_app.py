@@ -27,6 +27,7 @@ from streamlit_option_menu import option_menu
 # ----------------------- Funciones --------------------------------------------
 # Definir la función para procesar los archivos
 
+
 def procesar_archivos(carpeta):
     correctos = 0
     incorrectos = 0
@@ -82,15 +83,15 @@ def procesar_estadisticas_autores(ruta_final):
 # ----------------------- Definición -------------------------------------------
 # Definir las rutas
 # ----------------------- Ruta App ---------------------------------------------
-ruta_brutos = '/mount/src/prueba/Datos Brutos'
-ruta_guardado = '/mount/src/prueba/Datos Completos'
-ruta_Publicaciones = 'Analisis/Publicaciones.csv'
-ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
-# ----------------------- Ruta GitHub ------------------------------------------
-# ruta_brutos = '/workspaces/prueba/Datos Brutos'
-# ruta_guardado = '/workspaces/prueba/Datos Completos'
+# ruta_brutos = '/mount/src/prueba/Datos Brutos'
+# ruta_guardado = '/mount/src/prueba/Datos Completos'
 # ruta_Publicaciones = 'Analisis/Publicaciones.csv'
 # ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
+# ----------------------- Ruta GitHub ------------------------------------------
+ruta_brutos = '/workspaces/prueba/Datos Brutos'
+ruta_guardado = '/workspaces/prueba/Datos Completos'
+ruta_Publicaciones = 'Analisis/Publicaciones.csv'
+ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
 # -------------------------------------------------------------------------------
 # Procesar los archivos
 correctos, incorrectos, archivos_incorrectos = procesar_archivos(ruta_guardado)
@@ -736,64 +737,92 @@ if selected == "Análisis de Coautoría":
 
 # ---------------------- Análisis de patentes -----------------------------------
 if selected == "Análisis de patentes":
-    
-    # Cargar el archivo CSV utilizando la ruta
+
+    # Cargar los archivos CSV utilizando las rutas
     df_patentes = pd.read_csv(ruta_Patentes, encoding='latin1')
     df_publicaciones = pd.read_csv(ruta_Publicaciones)
 
-    # Procesar la fecha de patente para convertirla en formato datetime
-    df_patentes['Filing Date'] = pd.to_datetime(df_patentes['Filing Date'], format='%d/%m/%Y')
-    
-    # Función para limpiar nombres de inventores/autores y normalizar
+    # Procesar la fecha de patente para convertirla en formato datetime (sin la hora)
+    df_patentes['Filing Date'] = pd.to_datetime(df_patentes['Filing Date'], format='%d/%m/%Y').dt.normalize()
+
+    # Normalizar los nombres de inventores/autores
     def normalizar_nombre(nombre):
         nombre = unicodedata.normalize('NFKD', nombre).encode('ascii', 'ignore').decode('utf-8').upper()
         return nombre
-    
+
     df_patentes['Inventor'] = df_patentes['Inventor'].apply(normalizar_nombre)
     df_publicaciones['Authors'] = df_publicaciones['Authors'].apply(normalizar_nombre)
+
+    # Procesar las fechas de publicación en diferentes formatos
+    def procesar_fecha_publicacion(fecha):
+        fecha = str(fecha).upper()  # Convertir todo a mayúsculas por consistencia
+        try:
+            # Intentar procesar los casos que solo tienen año
+            if len(fecha) == 4:
+                return pd.to_datetime(fecha, format='%Y')
+            # Procesar casos con "mes y año"
+            elif any(mes in fecha for mes in ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']):
+                return pd.to_datetime(fecha, format='%b %Y', errors='coerce')
+            # Procesar casos con "día, mes y año"
+            else:
+                return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
+        except Exception as e:
+            return pd.NaT
+
+    df_publicaciones['Publication Date'] = df_publicaciones['Publication Date'].apply(procesar_fecha_publicacion)
+
+    # Eliminar duplicados en las patentes por autor
+    df_patentes_unique = df_patentes.drop_duplicates(subset=['Inventor', 'Filing Date'])
+
+    # Función para calcular el total de publicaciones antes y después de la fecha de patente por autor
+    def calcular_publicaciones_por_autor(df_publicaciones, fecha_patente, autor):
+        publicaciones_antes = df_publicaciones[
+            (df_publicaciones['Authors'] == autor) & 
+            (df_publicaciones['Publication Date'] < fecha_patente)
+        ]
+        publicaciones_despues = df_publicaciones[
+            (df_publicaciones['Authors'] == autor) & 
+            (df_publicaciones['Publication Date'] >= fecha_patente)
+        ]
+        return len(publicaciones_antes), len(publicaciones_despues)
     
-    # Realizar el merge entre publicaciones y patentes usando el campo de autores/inventores
-    df_merged = pd.merge(df_publicaciones, df_patentes, left_on='Authors', right_on='Inventor', how='inner')
-    
-    def publicaciones_antes_despues(row, fecha_patente):
-        # Extraer las columnas que son años
-        años_publicaciones = df_merged.columns[df_merged.columns.str.match(r'\d{4}')].astype(int)
+    start_time = time.time()
 
-        # Filtrar años antes y después de la fecha de patente
-        publicaciones_antes = [str(año) for año in años_publicaciones if año < fecha_patente.year]
-        publicaciones_despues = [str(año) for año in años_publicaciones if año >= fecha_patente.year]
+    # Agregar las columnas de publicaciones antes y después por cada patente
+    df_patentes_unique[['Publicaciones antes', 'Publicaciones después']] = df_patentes_unique.apply(
+        lambda row: calcular_publicaciones_por_autor(df_publicaciones, row['Filing Date'], row['Inventor']), axis=1, result_type='expand'
+    )
 
-        # Sumar el total de publicaciones antes y después de la patente
-        total_antes = row[publicaciones_antes].sum()
-        total_despues = row[publicaciones_despues].sum()
-
-        return total_antes, total_despues
-
-    
-    # Agregar columnas con número de publicaciones antes y después de la patente
-    df_merged['Publicaciones antes'], df_merged['Publicaciones después'] = zip(*df_merged.apply(lambda row: publicaciones_antes_despues(row, row['Filing Date']), axis=1))
-
-    
     # Calcular la diferencia de publicaciones antes y después
-    df_merged['Cambio en Publicaciones'] = df_merged['Publicaciones después'] - df_merged['Publicaciones antes']
-    
+    df_patentes_unique['Cambio en Publicaciones'] = df_patentes_unique['Publicaciones después'] - df_patentes_unique['Publicaciones antes']
+
     # Mostrar resultados
     st.subheader("Análisis de Patentes y Publicaciones Científicas")
-    
+
+    # Selección del autor por el usuario
+    autores_unicos = df_patentes_unique['Inventor'].unique()
+    autor_seleccionado = st.selectbox("Seleccione un autor", autores_unicos)
+
+    # Filtrar el DataFrame por el autor seleccionado
+    df_autor = df_patentes_unique[df_patentes_unique['Inventor'] == autor_seleccionado]
+
     # Gráfico de barras para visualizar el cambio en publicaciones
-    fig = px.bar(df_merged, x='Inventor', y=['Publicaciones antes', 'Publicaciones después'],
-                 title='Publicaciones antes y después de la patente por inventor')
-    
+    fig = px.bar(df_autor, x='Inventor', y=['Publicaciones antes', 'Publicaciones después'],
+                 title=f'Publicaciones antes y después de la patente para {autor_seleccionado}')
+
     st.plotly_chart(fig)
-    
+
     # Gráfico de dispersión para visualizar la correlación entre patentes y publicaciones
-    fig2 = px.scatter(df_merged, x='Publicaciones antes', y='Publicaciones después',
-                      title='Correlación entre publicaciones antes y después de la patente')
-    
+    fig2 = px.scatter(df_autor, x='Publicaciones antes', y='Publicaciones después',
+                      title=f'Correlación entre publicaciones antes y después de la patente para {autor_seleccionado}')
+
     st.plotly_chart(fig2)
-    
+
     # Mostrar resumen de resultados
     st.write("Resumen:")
-    st.write(df_merged[['Inventor', 'Patent', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']])
+    st.write(df_autor[['Inventor', 'Patent', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']])
 
+
+    end_time = time.time()
+    st.write(f"Tiempo de ejecución: {end_time - start_time} segundos")
 # -------------------------------------------------------------------------------

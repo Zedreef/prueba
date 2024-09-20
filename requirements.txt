@@ -6,3 +6,4 @@ matplotlib
 streamlit_option_menu
 networkx
 numpy
+statsmodels
