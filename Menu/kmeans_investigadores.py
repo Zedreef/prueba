@@ -60,7 +60,7 @@ def graficar_kmedoids(X, labels, medoids, title, xlabel, ylabel):
         x=medoids[:, 0],
         y=medoids[:, 1],
         mode='markers',
-        marker=dict(color='blue', size=12, symbol='x'),
+        marker=dict(color='red', size=12, symbol='x'),
         name='Medoids'
     ))
     fig.update_layout(title=title, xaxis_title=xlabel, yaxis_title=ylabel)

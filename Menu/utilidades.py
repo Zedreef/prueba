@@ -6,10 +6,10 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # ----------------------- Ruta App ---------------------------------------------
-RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
-RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
-RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
-RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
+# RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
+# RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
+# RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
+# RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
 # ----------------------- Ruta GitHub ------------------------------------------
 # RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
 # RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
