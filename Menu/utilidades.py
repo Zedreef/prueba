@@ -1,8 +1,21 @@
 import os
 import re
+import unicodedata
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+
+# ----------------------- Ruta App ---------------------------------------------
+RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
+RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
+RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
+RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
+# ----------------------- Ruta GitHub ------------------------------------------
+# RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
+# RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
+# RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
+# RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+# -------------------------------------------------------------------------------
 
 # ----------------------- Funciones --------------------------------------------
 # Función para calcular el índice h
@@ -295,14 +308,100 @@ def graficar_citas_publicaciones(df_autor, autor_seleccionado):
     # Mostrar la gráfica en Streamlit
     st.plotly_chart(fig)
 
-# ----------------------- Ruta App ---------------------------------------------
-RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
-RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
-RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
-RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
-# ----------------------- Ruta GitHub ------------------------------------------
-# RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
-# RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
-# RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
-# RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
-# -------------------------------------------------------------------------------
+# Función para procesar los autores y reemplazar
+def procesar_autores_Brutos(df, nombre_archivo):
+    if 'Corporate Authors' in df.columns:
+        df = df.rename(columns={'Corporate Authors': 'co-author'})
+    df['co-author'] = df['co-author'].fillna('') + \
+        '; ' + df['Authors'].fillna('')
+    df['Authors'] = os.path.splitext(nombre_archivo)[0]
+    columnas_a_mantener = ['Title', 'Authors', 'co-author']
+    columnas_existentes = [
+        col for col in columnas_a_mantener if col in df.columns]
+    if len(columnas_existentes) < len(columnas_a_mantener):
+        columnas_faltantes = set(
+            columnas_a_mantener) - set(columnas_existentes)
+        print(f"Advertencia: Columnas faltantes {columnas_faltantes}")
+    df = df[columnas_existentes]
+    return df
+
+# Función para limpiar texto
+def limpiar_texto(texto):
+    texto = unicodedata.normalize('NFKD', texto)
+    texto = ''.join(c for c in texto if not unicodedata.combining(c))
+    texto = ''.join(c for c in texto if c.isprintable())
+    texto = re.sub(r'\d+', '', texto)
+    texto = ' '.join(word for word in re.sub(
+        r'\s+', ' ', texto).strip().split() if len(word) > 1)
+    return texto
+
+# Crea un objeto Scatter de Plotly para los nodos del grafo.
+def create_node_trace(G, pos, node_colors, node_size=10):
+    x_nodes = []
+    y_nodes = []
+    node_texts = []
+    for node in G.nodes():
+        x, y = pos[node]
+        x_nodes.append(x)
+        y_nodes.append(y)
+        node_texts.append(node)
+    return go.Scatter(
+        x=x_nodes,
+        y=y_nodes,
+        mode='markers',
+        marker=dict(size=node_size, color=node_colors,
+                    line=dict(width=1, color='black')),
+        hovertext=node_texts,
+        hoverinfo='text'
+    )
+
+# Crea un objeto Scatter de Plotly para las aristas (conexiones) del grafo.
+def create_edge_trace(G, pos, edge_color='gray'):
+    edge_x = []
+    edge_y = []
+    for edge in G.edges():
+        x0, y0 = pos[edge[0]]
+        x1, y1 = pos[edge[1]]
+        edge_x.extend([x0, x1, None])
+        edge_y.extend([y0, y1, None])
+    return go.Scatter(
+        x=edge_x,
+        y=edge_y,
+        mode='lines',
+        line=dict(width=0.5, color=edge_color),
+        hoverinfo='none'
+    )
+
+# Procesar las fechas de publicación en diferentes formatos
+def procesar_fecha_publicacion(fecha):
+    if pd.isnull(fecha):
+        return pd.NaT  # Manejar valores nulos
+
+    fecha = str(fecha).strip().upper()  # Convertir a mayúsculas y quitar espacios
+
+    # Expresión regular para identificar formatos complejos
+    if "JAN-FEB" in fecha:
+        # Manejar el rango de meses como una fecha arbitraria del primer mes
+        return pd.to_datetime("01 " + fecha.split('-')[0] + " 2000", format='%d %b %Y', errors='coerce')
+
+    try:
+        if re.match(r'^\w{3} \d{1,2}, \d{4}$', fecha):
+            # Formato: "DEC 28, 2015"
+            return pd.to_datetime(fecha, format='%b %d, %Y', errors='coerce')
+        elif re.match(r'^\w{3} \d{1,2} \d{4}$', fecha):
+            # Formato: "MAY 3 2017"
+            return pd.to_datetime(fecha, format='%b %d %Y', errors='coerce')
+        elif re.match(r'^\w{3} \d{4}$', fecha):
+            # Formato: "FEB 2020"
+            return pd.to_datetime(fecha, format='%b %Y', errors='coerce')
+        elif re.match(r'^\d{1,2} \w{3} \d{4}$', fecha):
+            # Formato: "28 DEC 2015"
+            return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
+        elif re.match(r'^\w{3} \d{2}$', fecha):
+            # Formato: "JAN 20" (asumiendo que el año es actual)
+            return pd.to_datetime(fecha + ' ' + str(pd.datetime.now().year), format='%b %y', errors='coerce')
+        else:
+            # Formato no reconocido
+            return pd.NaT
+    except Exception as e:
+        return pd.NaT
