@@ -235,7 +235,7 @@ def calcular_resumen(df):
     return pd.DataFrame(resumen)
 
 # Función para gráfica las citas y publicaciones por año
-def graficar_citas_publicaciones(df_autor, autor_seleccionado):
+def graficar_citas_publicaciones_Comparados(df_autor, autor_seleccionado):
     # Extraer el año de 'Publication Date' usando una expresión regular para capturar solo el año
     df_autor['Year'] = df_autor['Publication Date'].apply(lambda x: re.search(
         r'\d{4}', str(x)).group() if re.search(r'\d{4}', str(x)) else None)

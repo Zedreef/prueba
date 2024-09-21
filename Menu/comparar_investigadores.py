@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 import re
-from .utilidades import  calcular_resumen,graficar_citas_publicaciones,procesar_autores, RUTA_PUBLICACIONES
+from .utilidades import  calcular_resumen,graficar_citas_publicaciones_Comparados,procesar_autores, RUTA_PUBLICACIONES
 
 def mostrar_comparar_investigadores():
     df_publicaciones = pd.read_csv(RUTA_PUBLICACIONES)
@@ -33,7 +33,7 @@ def mostrar_comparar_investigadores():
                 st.write(f"Autores encontrados entre {rango_fechas[0]} y {rango_fechas[1]}:")
                 st.table(df_resumen)
             with col2:
-                graficar_citas_publicaciones(df_resultado)
+                graficar_citas_publicaciones_Comparados(df_resultado)
 
         except Exception as e:
             st.error(f"Error procesando los datos: {e}")
