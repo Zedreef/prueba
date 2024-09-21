@@ -5,6 +5,128 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # ----------------------- Funciones --------------------------------------------
+# Función para calcular el índice h
+def calcular_indice_h(df):
+    # Ordenar las publicaciones por número de citas en orden descendente
+    citas = df['Total Citations'].sort_values(ascending=False).values
+    h_index = 0
+
+    # Calcular el índice h
+    for i, c in enumerate(citas):
+        if c >= i + 1:
+            h_index = i + 1
+        else:
+            break
+    return h_index
+
+# Función para calcular el resumen de citas para cada autor
+def calcular_resumen(df):
+    resumen = []
+
+    # Obtener los autores únicos
+    autores = df['Authors'].unique()
+
+    for autor in autores:
+        # Filtrar los datos para el autor actual
+        df_autor = df[df['Authors'] == autor]
+
+        # Calcular la suma de 'Total Citations', el promedio de 'Average per Year', y el índice h
+        total_citations = df_autor['Total Citations'].sum()
+        average_per_year = df_autor['Average per Year'].mean()
+        h_index = calcular_indice_h(df_autor)
+
+        # Agregar los datos al resumen
+        resumen.append({
+            'Autor': autor,
+            'Total de Citas': total_citations,
+            'Promedio por Año': average_per_year,
+            'Índice h': h_index
+        })
+
+    # Convertir el resumen en un DataFrame
+    return pd.DataFrame(resumen)
+
+# Función para graficar citas y publicaciones por año
+def graficar_citas_publicaciones(df):
+    df['Year'] = df['Publication Date'].apply(lambda x: re.search(
+        r'\d{4}', str(x)).group() if re.search(r'\d{4}', str(x)) else None)
+    df = df[df['Year'].notna()].copy()
+    df['Year'] = df['Year'].astype(int)
+    publicaciones_por_año = df.groupby('Year').size()
+    citas_por_año = df.groupby('Year')['Total Citations'].sum()
+
+    años = sorted(publicaciones_por_año.index)
+    max_publicaciones = publicaciones_por_año.max()
+    max_citas = citas_por_año.max()
+
+    fig = go.Figure()
+    for autor in df['Authors'].unique():
+        df_autor = df[df['Authors'] == autor]
+
+        publicaciones_por_año = df_autor.groupby('Year').size()
+        citas_por_año = df_autor.groupby('Year')['Total Citations'].sum()
+
+        # Agregar las barras para las publicaciones por autor (Eje izquierdo)
+        fig.add_trace(go.Bar(
+            x=publicaciones_por_año.index,
+            y=publicaciones_por_año,
+            name=f'Publications ({autor})',
+            yaxis='y1'
+        ))
+
+        # Agregar la línea para las citas por autor (Eje derecho)
+        fig.add_trace(go.Scatter(
+            x=citas_por_año.index,
+            y=citas_por_año,
+            mode='lines+markers',
+            name=f'Times Cited ({autor})',
+            yaxis='y2'
+        ))
+
+    fig.update_layout(
+        title="Times Cited and Publications Over Time",
+        xaxis_title='Year',
+        yaxis=dict(title='Publications', side='left',
+                    range=[0, max_publicaciones + 1]),
+        yaxis2=dict(title='Times Cited', overlaying='y',
+                    side='right', range=[0, max_citas + 1]),
+        legend=dict(orientation="v", yanchor="middle",
+                    y=0.5, xanchor="left", x=1.1)
+    )
+
+    st.plotly_chart(fig)
+
+def procesar_autores(df, cantidad_autores, fecha_inicio, fecha_fin):
+    # Filtrar por rango de fechas
+    df_filtrado = df[(df['Publication Date'].notna()) &
+                        (pd.to_datetime(df['Publication Date'], errors='coerce').dt.year >= fecha_inicio) &
+                        (pd.to_datetime(df['Publication Date'], errors='coerce').dt.year <= fecha_fin)]
+
+    # Filtrar solo las columnas de interés
+    columnas_especificas = ['Title', 'Authors', 'Source Title',
+                            'Publication Date', 'Total Citations', 'Average per Year']
+    columnas_de_años = [
+        col for col in df.columns if col.isdigit() and int(col) >= 1960]
+    columnas_de_años_validas = [col for col in columnas_de_años if (
+        df_filtrado[col].notna() & (df_filtrado[col] != 0)).any()]
+
+    # Agrupar por autor y contar cuántas publicaciones tiene cada autor
+    df_agrupado = df_filtrado.groupby(
+        'Authors').size().reset_index(name='Publicaciones')
+
+    # Seleccionar los autores con más publicaciones (según la cantidad seleccionada por el usuario)
+    autores_seleccionados = df_agrupado.nlargest(
+        cantidad_autores, 'Publicaciones')['Authors']
+
+    # Filtrar el DataFrame original por los autores seleccionados
+    df_final = df_filtrado[df_filtrado['Authors'].isin(
+        autores_seleccionados)].copy()
+
+    # Mantener solo las columnas relevantes
+    df_final = pd.concat(
+        [df_final[columnas_especificas], df_final[columnas_de_años_validas]], axis=1)
+
+    return df_final
 
 def procesar_archivos(carpeta):
     correctos = 0
