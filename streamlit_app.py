@@ -7,6 +7,10 @@ import unicodedata
 import logging
 import itertools
 from io import StringIO
+from Menu.utilidades import procesar_archivos, procesar_estadisticas_autores, RUTA_GUARDADO, RUTA_PUBLICACIONES
+from Menu.inicio import mostrar_inicio
+from Menu.buscar_investigador import mostrar_buscar_investigador
+
 
 # Librerías de análisis de datos y matemáticas
 import pandas as pd
@@ -28,57 +32,55 @@ from streamlit_option_menu import option_menu
 # ----------------------- Funciones --------------------------------------------
 # Definir la función para procesar los archivos
 
+# def procesar_archivos(carpeta):
+#     correctos = 0
+#     incorrectos = 0
 
-def procesar_archivos(carpeta):
-    correctos = 0
-    incorrectos = 0
+#     archivos_incorrectos = []
 
-    archivos_incorrectos = []
+#     for filename in os.listdir(carpeta):
+#         if filename.endswith(".txt"):
+#             ruta_archivo = os.path.join(carpeta, filename)
 
-    for filename in os.listdir(carpeta):
-        if filename.endswith(".txt"):
-            ruta_archivo = os.path.join(carpeta, filename)
+#             try:
+#                 df = pd.read_csv(ruta_archivo, sep=',', quotechar='"',
+#                                  engine='python')
 
-            try:
-                df = pd.read_csv(ruta_archivo, sep=',', quotechar='"',
-                                 engine='python')
+#                 correctos += 1
+#             except Exception as e:
+#                 incorrectos += 1
+#                 archivos_incorrectos.append(filename)
 
-                correctos += 1
-            except Exception as e:
-                incorrectos += 1
-                archivos_incorrectos.append(filename)
-
-    return correctos, incorrectos, archivos_incorrectos
+#     return correctos, incorrectos, archivos_incorrectos
 
 # Función para generar las estadísticas por autor
 
+# def procesar_estadisticas_autores(ruta_final):
+#     # Cargue los datos del archivo CSV
+#     data = pd.read_csv(ruta_final)
 
-def procesar_estadisticas_autores(ruta_final):
-    # Cargue los datos del archivo CSV
-    data = pd.read_csv(ruta_final)
+#     # Obtener la lista de columnas de años presentes en el DataFrame
+#     year_columns = [col for col in data.columns if col.isdigit()]
 
-    # Obtener la lista de columnas de años presentes en el DataFrame
-    year_columns = [col for col in data.columns if col.isdigit()]
+#     # Sumar las citas por año presente en el DataFrame
+#     data['Sum Of Times Cited'] = data[year_columns].fillna(0).sum(axis=1)
 
-    # Sumar las citas por año presente en el DataFrame
-    data['Sum Of Times Cited'] = data[year_columns].fillna(0).sum(axis=1)
+#     # Contar el número de publicaciones (títulos) por autor
+#     publications_per_author = data.groupby(
+#         'Authors')['Title'].count().reset_index()
+#     publications_per_author.columns = ['Authors', 'Publications']
 
-    # Contar el número de publicaciones (títulos) por autor
-    publications_per_author = data.groupby(
-        'Authors')['Title'].count().reset_index()
-    publications_per_author.columns = ['Authors', 'Publications']
+#     # Sumar las citas totales por autor
+#     citations_per_author = data.groupby(
+#         'Authors')['Sum Of Times Cited'].sum().reset_index()
 
-    # Sumar las citas totales por autor
-    citations_per_author = data.groupby(
-        'Authors')['Sum Of Times Cited'].sum().reset_index()
+#     # Combinar el total de citas y publicaciones por autor
+#     author_stats = pd.merge(publications_per_author,
+#                             citations_per_author, on='Authors')
 
-    # Combinar el total de citas y publicaciones por autor
-    author_stats = pd.merge(publications_per_author,
-                            citations_per_author, on='Authors')
-
-    # Eliminar autores vacíos o no válidos
-    author_stats = author_stats[author_stats['Authors'].notna()]
-    return author_stats
+#     # Eliminar autores vacíos o no válidos
+#     author_stats = author_stats[author_stats['Authors'].notna()]
+#     return author_stats
 
 
 # ----------------------- Definición -------------------------------------------
@@ -95,18 +97,18 @@ ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
 # ruta_Patentes = 'Analisis/Investigadores PATENTES.csv'
 # -------------------------------------------------------------------------------
 # Procesar los archivos
-correctos, incorrectos, archivos_incorrectos = procesar_archivos(ruta_guardado)
-author_stats = procesar_estadisticas_autores(ruta_Publicaciones)
+# correctos, incorrectos, archivos_incorrectos = procesar_archivos(ruta_guardado)
+# author_stats = procesar_estadisticas_autores(ruta_Publicaciones)
 
-# Filtrar y ordenar los datos de los autores
-min_articles = 1
-min_citations = 0
-filtered_stats = author_stats[
-    (author_stats['Publications'] >= min_articles) |
-    (author_stats['Sum Of Times Cited'] >= min_citations)
-]
-filtered_stats = filtered_stats.sort_values(by='Sum Of Times Cited',
-                                            ascending=False)
+# # Filtrar y ordenar los datos de los autores
+# min_articles = 1
+# min_citations = 0
+# filtered_stats = author_stats[
+#     (author_stats['Publications'] >= min_articles) |
+#     (author_stats['Sum Of Times Cited'] >= min_citations)
+# ]
+# filtered_stats = filtered_stats.sort_values(by='Sum Of Times Cited',
+#                                             ascending=False)
 
 # -------------------------------------------------------------------------------
 
@@ -129,220 +131,52 @@ with st.sidebar:
         default_index=0
     )
 # -------------------------------------------------------------------------------
-
-# ---------------------- Dashboard principal ------------------------------------
+# Dashboard principal
 if selected == "Inicio":
-    # Encabezado
-    st.title("📊 Informe de Archivos Procesados")
-
-    # Métricas clave con los resultados de `procesar_archivos`
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Archivos correctos", correctos)
-    col2.metric("Archivos con error", incorrectos)
-    col3.metric("Archivos en total", correctos + incorrectos)
-
-    # Mostrar detalles adicionales de los archivos incorrectos si existen
-    if incorrectos > 0:
-        st.subheader("Archivos con error:")
-        for archivo in archivos_incorrectos:
-            st.write(f"- {archivo}")
-
-# -------Gráfico de barras para mostrar archivos correctos vs incorrectos--------
-    st.subheader("Gráfico de Archivos Procesados")
-
-    # Datos para la gráfica
-    data = {
-        'Categoría': ['Correctos', 'Incorrectos'],
-        'Cantidad': [correctos, incorrectos]
-    }
-    df = pd.DataFrame(data)
-
-    # Crear gráfica de barras
-    fig = px.bar(df, x='Categoría', y='Cantidad', color='Categoría',
-                 title="Archivos Procesados Correctamente vs Incorrectamente",
-                 labels={'Cantidad': 'Número de Archivos'},
-                 height=400)
-
-    st.plotly_chart(fig)
-# -------------------------------------------------------------------------------
-    
+    mostrar_inicio()
+elif selected == "Buscar Investigador":
+    mostrar_buscar_investigador(RUTA_PUBLICACIONES)
 # --------------------- Buscar Investigador -------------------------------------
-if selected == "Buscar Investigador":
-    # Función para procesar los datos del autor seleccionado
-    def procesar_autor(df, autor_seleccionado):
-        # Filtrar el DataFrame por autor seleccionado y eliminar filas con 'Authors' vacíos
-        df_filtrado = df[df['Authors'].notna() & (df['Authors'] != '') & (
-            df['Authors'] == autor_seleccionado)].copy()
+# if selected == "Buscar Investigador":
 
-        # Mantener solo las columnas específicas que te interesan
-        columnas_especificas = ['Title', 'Authors', 'Source Title',
-                                'Publication Date', 'Total Citations', 'Average per Year']
 
-        # Filtrar dinámicamente columnas de años (desde 1960 en adelante)
-        columnas_de_años = [
-            col for col in df.columns if col.isdigit() and int(col) >= 1960]
+#     # Cargar el archivo CSV y eliminar duplicados de autores
+#     df_publicaciones = pd.read_csv(ruta_Publicaciones)
+#     autores_unicos = df_publicaciones['Authors'].drop_duplicates(
+#     ).sort_values()
 
-        # Mantener solo las columnas de años que contienen al menos un valor distinto de 0 en el DataFrame filtrado
-        columnas_de_años_validas = [col for col in columnas_de_años if (
-            df_filtrado[col].notna() & (df_filtrado[col] != 0)).any()]
+#     # Configuración de la app en Streamlit
+#     st.title("Análisis de Publicaciones")
 
-        # Combinar las columnas específicas con las columnas de años válidas
-        df_final = pd.concat([df_filtrado[columnas_especificas],
-                             df_filtrado[columnas_de_años_validas]], axis=1)
+#     # Selector de autor
+#     autor_seleccionado = st.selectbox("Selecciona un autor", autores_unicos)
 
-        return df_final
+#     # Mostrar automáticamente los datos del autor seleccionado
+#     if autor_seleccionado:
+#         try:
+#             # Procesar la información del autor seleccionado
+#             df_resultado = procesar_autor(df_publicaciones, autor_seleccionado)
 
-    # Función para calcular el índice h
-    def calcular_indice_h(df):
-        # Ordenar las publicaciones por número de citas en orden descendente
-        citas = df['Total Citations'].sort_values(ascending=False).values
-        h_index = 0
+#             # Mostrar el DataFrame resultante
+#             st.write(f"Datos de {autor_seleccionado}: ")
+#             st.dataframe(df_resultado)
 
-        # Calcular el índice h
-        for i, c in enumerate(citas):
-            if c >= i + 1:
-                h_index = i + 1
-            else:
-                break
-        return h_index
+#             # Calcular el resumen
+#             df_resumen = calcular_resumen(df_resultado)
 
-    # Función para calcular el resumen de citas
-    def calcular_resumen(df):
-        resumen = []
+#             col1, col2 = st.columns([0.25, 1])
 
-        # Obtener los autores únicos
-        autores = df['Authors'].unique()
+#             with col1:
+#                 # Mostrar el resumen
+#                 st.write(f"Métrica de citas: ")
+#                 st.table(df_resumen)
 
-        for autor in autores:
-            # Filtrar los datos para el autor actual
-            df_autor = df[df['Authors'] == autor]
+#             with col2:
+#                 # Gráfica con los datos
+#                 graficar_citas_publicaciones(df_resultado, autor_seleccionado)
 
-            # Calcular la suma de 'Total Citations', el promedio de 'Average per Year', y el índice h
-            total_citations = df_autor['Total Citations'].sum()
-            average_per_year = df_autor['Average per Year'].mean()
-            h_index = calcular_indice_h(df_autor)
-
-            # Agregar los datos al resumen
-            resumen.append({
-                'Total Citas': total_citations,
-                'Promedio Año': average_per_year,
-                'Índice h': h_index
-            })
-
-        # Convertir el resumen en un DataFrame
-        return pd.DataFrame(resumen)
-
-    # Función para graficar las citas y publicaciones por año
-    def graficar_citas_publicaciones(df_autor, autor_seleccionado):
-        # Extraer el año de 'Publication Date' usando una expresión regular para capturar solo el año
-        df_autor['Year'] = df_autor['Publication Date'].apply(lambda x: re.search(
-            r'\d{4}', str(x)).group() if re.search(r'\d{4}', str(x)) else None)
-
-        # Eliminar las filas donde no se pudo extraer un año válido
-        df_autor = df_autor[df_autor['Year'].notna()].copy()
-
-        # Convertir la columna 'Year' a entero
-        df_autor['Year'] = df_autor['Year'].astype(int)
-
-        # Agrupar por el año y contar el número de publicaciones
-        publicaciones_por_año = df_autor.groupby(
-            'Year').size()  # Número de publicaciones por año
-
-        # Agrupar por el año y sumar el total de citas
-        citas_por_año = df_autor.groupby(
-            'Year')['Total Citations'].sum()  # Total de citas por año
-
-        # Obtener los años únicos para la gráfica
-        años = sorted(publicaciones_por_año.index)
-
-        # Obtener el valor máximo para escalar ejes
-        max_publicaciones = publicaciones_por_año.max()
-        max_citas = citas_por_año.max()
-
-        # Crear la gráfica con Plotly
-        fig = go.Figure()
-
-        # Agregar las barras para las publicaciones (Eje izquierdo)
-        fig.add_trace(go.Bar(
-            x=años,
-            y=publicaciones_por_año,
-            name='Publications',
-            yaxis='y1'
-        ))
-
-        # Agregar la línea para las citas (Eje derecho)
-        fig.add_trace(go.Scatter(
-            x=años,
-            y=citas_por_año,
-            mode='lines+markers',
-            name='Times Cited',
-            yaxis='y2'
-        ))
-
-        # Configurar los ejes
-        fig.update_layout(
-            title=f"Times Cited and Publications Over Time for {autor_seleccionado}",
-            xaxis_title='Year',
-            yaxis=dict(
-                title='Publications',
-                side='left',
-                range=[0, max_publicaciones + 1]
-            ),
-            yaxis2=dict(
-                title='Times Cited',
-                overlaying='y',
-                side='right',
-                range=[0, max_citas + 1]
-            ),
-            legend=dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
-            )
-        )
-
-        # Mostrar la gráfica en Streamlit
-        st.plotly_chart(fig)
-
-    # Cargar el archivo CSV y eliminar duplicados de autores
-    df_publicaciones = pd.read_csv(ruta_Publicaciones)
-    autores_unicos = df_publicaciones['Authors'].drop_duplicates(
-    ).sort_values()
-
-    # Configuración de la app en Streamlit
-    st.title("Análisis de Publicaciones")
-
-    # Selector de autor
-    autor_seleccionado = st.selectbox("Selecciona un autor", autores_unicos)
-
-    # Mostrar automáticamente los datos del autor seleccionado
-    if autor_seleccionado:
-        try:
-            # Procesar la información del autor seleccionado
-            df_resultado = procesar_autor(df_publicaciones, autor_seleccionado)
-
-            # Mostrar el DataFrame resultante
-            st.write(f"Datos de {autor_seleccionado}: ")
-            st.dataframe(df_resultado)
-
-            # Calcular el resumen
-            df_resumen = calcular_resumen(df_resultado)
-
-            col1, col2 = st.columns([0.25, 1])
-
-            with col1:
-                # Mostrar el resumen
-                st.write(f"Métrica de citas: ")
-                st.table(df_resumen)
-
-            with col2:
-                # Gráfica con los datos
-                graficar_citas_publicaciones(df_resultado, autor_seleccionado)
-
-        except Exception as e:
-            st.error(f"Error procesando los datos: {e}")
+#         except Exception as e:
+#             st.error(f"Error procesando los datos: {e}")
 # -------------------------------------------------------------------------------
 
 # ----------------Comparación de autores-----------------------------------------
@@ -830,7 +664,8 @@ if selected == "Análisis de patentes":
 
     # Agrupar publicaciones por año
     df_autor_publicaciones['Año'] = df_autor_publicaciones['Publication Date'].dt.year
-    publicaciones_por_año = df_autor_publicaciones.groupby('Año').size().reset_index(name='Publicaciones')
+    publicaciones_por_año = df_autor_publicaciones.groupby('Año')['Publication Date'].count().reset_index(name='Publicaciones')
+    publicaciones_por_año['Año'] = publicaciones_por_año['Año'].astype(int)
 
     # Agrupar patentes por año
     df_autor['Año'] = df_autor['Filing Date'].dt.year
@@ -843,29 +678,53 @@ if selected == "Análisis de patentes":
     # Unir datos de publicaciones y patentes
     datos_combinados = pd.merge(publicaciones_por_año, patentes_por_año, on='Año', how='outer').fillna(0)
 
-    # Encontrar el año con más patentes
-    año_con_mas_patentes = patentes_por_año.loc[patentes_por_año['Patentes'].idxmax(), 'Año']
+    print(publicaciones_por_año.head())
+    print(patentes_por_año.head())
 
     # Crear figura
     fig = go.Figure()
+
+    # Obtener los años de las patentes en una lista
+    años_patentes = df_autor['Año'].tolist()
+
+    # Para cada año de patente
+    for index, año_patente in enumerate(años_patentes):
+        # Identificar la patente anterior y siguiente (si existen)
+        año_patente_anterior = años_patentes[index - 1] if index > 0 else None
+        año_patente_siguiente = años_patentes[index + 1] if index < len(años_patentes) - 1 else None
+
+        # Dividir los datos antes de la patente
+        if año_patente_anterior:
+            datos_antes_patente = datos_combinados[
+                (datos_combinados['Año'] < año_patente) & 
+                (datos_combinados['Año'] >= año_patente_anterior)
+            ]
+        else:
+            datos_antes_patente = datos_combinados[datos_combinados['Año'] < año_patente]
+
+        # Dividir los datos después de la patente
+        if año_patente_siguiente:
+            datos_despues_patente = datos_combinados[
+                (datos_combinados['Año'] >= año_patente) & 
+                (datos_combinados['Año'] < año_patente_siguiente)
+            ]
+        else:
+            datos_despues_patente = datos_combinados[datos_combinados['Año'] >= año_patente]
+
+        # Agregar líneas de tendencia
+        agregar_tendencia(datos_antes_patente, fig, f"Tendencia publicaciones antes de {año_patente}", 'orange', 'dash')
+        agregar_tendencia(datos_despues_patente, fig, f"Tendencia publicaciones después de {año_patente}", 'green', 'solid')
+
+        # Añadir línea vertical para la patente
+        fig.add_vline(x=año_patente, line_dash="dash", line_color="red", 
+                    annotation_text=f"Patente en {año_patente}")
 
     # Agregar publicaciones y patentes
     agregar_trazado(fig, datos_combinados['Año'], datos_combinados['Publicaciones'], 'Publicaciones', 'blue')
     agregar_trazado(fig, datos_combinados['Año'], datos_combinados['Patentes'], 'Patentes', 'orange')
 
-    # Añadir línea vertical para el año con más patentes
-    fig.add_vline(x=año_con_mas_patentes, line_dash="dash", line_color="red", annotation_text=f"Año con más patentes: {año_con_mas_patentes}")
-
     # Agregar título a la gráfica
-    fig.update_layout(title=f"Tendencia de Publicaciones y Patentes de {autor_seleccionado} a lo Largo del Tiempo")
-
-    # Dividir datos antes y después del año con más patentes
-    datos_antes = datos_combinados[datos_combinados['Año'] < año_con_mas_patentes]
-    datos_despues = datos_combinados[datos_combinados['Año'] >= año_con_mas_patentes]
-
-    # Agregar tendencias antes y después del año con más patentes
-    agregar_tendencia(datos_antes, fig, "Tendencia publicaciones antes", 'red', 'dash')
-    agregar_tendencia(datos_despues, fig, "Tendencia publicaciones después", 'green', 'solid')
+    fig.update_layout(title=f"Tendencia de Publicaciones y Patentes de {autor_seleccionado} Antes y Después de Cada Patente")
 
     # Mostrar gráfica
     st.plotly_chart(fig)
@@ -876,10 +735,10 @@ if selected == "Análisis de patentes":
     # Mostrar la tabla ajustada al tamaño del contenedor
     st.dataframe(df_autor[['Inventor', 'Patent', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']], use_container_width=True)
 
-
     # Calcular el tiempo de ejecución
     end_time = time.time()
     st.write(f"Tiempo de ejecución: {end_time - start_time} segundos")
+
 # -------------------------------------------------------------------------------
 
 # ---------------------- Análisis de conferencias- ------------------------------
