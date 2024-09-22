@@ -7,6 +7,7 @@ from Menu.todos_investigadores import mostrar_todos_investigadores
 from Menu.analisis_coautoria import mostrar_analisis_coautoria
 from Menu.analisis_patentes import mostrar_analisis_patentes
 from Menu.kmeans_investigadores import mostrar_analisis_kmeans
+from Menu.entrenamiento_pycaret import mostrar_pycaret
 
 # Librerías de visualización
 import streamlit as st
@@ -48,3 +49,5 @@ elif selected == "Análisis de patentes":
     mostrar_analisis_patentes()
 elif selected == "Análisis Kmeans":
     mostrar_analisis_kmeans()
+elif selected== "Análisis de conferencias":
+    mostrar_pycaret()

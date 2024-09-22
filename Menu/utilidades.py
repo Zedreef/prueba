@@ -380,6 +380,10 @@ def procesar_fecha_publicacion(fecha):
     fecha = str(fecha).strip().upper()  # Convertir a mayúsculas y quitar espacios
 
     # Expresión regular para identificar formatos complejos
+    if re.match(r'^\w{3}-\w{3} \d{4}$', fecha):
+        # Formato: "JUL-SEP 2011" (usamos el primer mes del rango)
+        return pd.to_datetime("01 " + fecha.split('-')[0] + " " + fecha[-4:], format='%d %b %Y', errors='coerce')
+
     if "JAN-FEB" in fecha:
         # Manejar el rango de meses como una fecha arbitraria del primer mes
         return pd.to_datetime("01 " + fecha.split('-')[0] + " 2000", format='%d %b %Y', errors='coerce')
@@ -399,7 +403,7 @@ def procesar_fecha_publicacion(fecha):
             return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
         elif re.match(r'^\w{3} \d{2}$', fecha):
             # Formato: "JAN 20" (asumiendo que el año es actual)
-            return pd.to_datetime(fecha + ' ' + str(pd.datetime.now().year), format='%b %y', errors='coerce')
+            return pd.to_datetime(fecha + ' ' + str(pd.to_datetime('today').year), format='%b %Y', errors='coerce')
         else:
             # Formato no reconocido
             return pd.NaT
