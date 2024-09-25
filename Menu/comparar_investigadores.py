@@ -15,7 +15,7 @@ def mostrar_comparar_investigadores():
             "Selecciona la cantidad de autores", min_value=1, value=5)
     with col4:
         rango_fechas = st.slider(
-            "Selecciona el rango de fechas", min_value=1960, max_value=2024, value=(2000, 2020))
+            "Selecciona el rango de fechas", min_value=2005, max_value=2024, value=(2010, 2020))
 
     if cantidad_autores and rango_fechas:
         try:

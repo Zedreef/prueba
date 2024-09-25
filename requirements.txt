@@ -9,3 +9,4 @@ numpy
 statsmodels
 pyclustering
 tensorflow
+keras

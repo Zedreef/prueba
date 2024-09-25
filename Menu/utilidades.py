@@ -10,11 +10,13 @@ RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
 RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
 RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
 RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
+RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
 # ----------------------- Ruta GitHub ------------------------------------------
 # RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
 # RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
 # RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
 # RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+# RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
 # -------------------------------------------------------------------------------
 
 # ----------------------- Funciones --------------------------------------------
@@ -119,7 +121,7 @@ def procesar_autores(df, cantidad_autores, fecha_inicio, fecha_fin):
     columnas_especificas = ['Title', 'Authors', 'Source Title',
                             'Publication Date', 'Total Citations', 'Average per Year']
     columnas_de_años = [
-        col for col in df.columns if col.isdigit() and int(col) >= 1960]
+        col for col in df.columns if col.isdigit() and int(col) >= 2005]
     columnas_de_años_validas = [col for col in columnas_de_años if (
         df_filtrado[col].notna() & (df_filtrado[col] != 0)).any()]
 
@@ -176,13 +178,17 @@ def procesar_autor(df, autor_seleccionado):
     df_filtrado = df[df['Authors'].notna() & (df['Authors'] != '') & (
         df['Authors'] == autor_seleccionado)].copy()
 
+    # Filtrar las publicaciones a partir del año 2005
+    df_filtrado['Publication Date'] = pd.to_datetime(df_filtrado['Publication Date'], errors='coerce').dt.normalize()
+    df_filtrado = df_filtrado[df_filtrado['Publication Date'].dt.year >= 2005]
+
     # Mantener solo las columnas específicas que te interesan
     columnas_especificas = ['Title', 'Authors', 'Source Title',
                             'Publication Date', 'Total Citations', 'Average per Year']
 
-    # Filtrar dinámicamente columnas de años (desde 1960 en adelante)
+    # Filtrar dinámicamente columnas de años (desde 2005 en adelante)
     columnas_de_años = [
-        col for col in df.columns if col.isdigit() and int(col) >= 1960]
+        col for col in df.columns if col.isdigit() and int(col) >= 2005]
 
     # Mantener solo las columnas de años que contienen al menos un valor distinto de 0 en el DataFrame filtrado
     columnas_de_años_validas = [col for col in columnas_de_años if (
