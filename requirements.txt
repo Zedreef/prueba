@@ -8,5 +8,5 @@ networkx
 numpy
 statsmodels
 pyclustering
-tensorflow
-keras
+tensorflow==2.17.0
+keras==3.5.0
