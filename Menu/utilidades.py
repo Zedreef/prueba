@@ -6,17 +6,17 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # ----------------------- Ruta App ---------------------------------------------
-RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
-RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
-RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
-RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
-RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
-# ----------------------- Ruta GitHub ------------------------------------------
-# RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
-# RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
-# RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
-# RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+# RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
+# RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
+# RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
+# RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
 # RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
+# ----------------------- Ruta GitHub ------------------------------------------
+RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
+RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
+RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
+RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
 # -------------------------------------------------------------------------------
 
 # ----------------------- Funciones --------------------------------------------
@@ -377,41 +377,3 @@ def create_edge_trace(G, pos, edge_color='gray'):
         line=dict(width=0.5, color=edge_color),
         hoverinfo='none'
     )
-
-# Procesar las fechas de publicación en diferentes formatos
-def procesar_fecha_publicacion(fecha):
-    if pd.isnull(fecha):
-        return pd.NaT  # Manejar valores nulos
-
-    fecha = str(fecha).strip().upper()  # Convertir a mayúsculas y quitar espacios
-
-    # Expresión regular para identificar formatos complejos
-    if re.match(r'^\w{3}-\w{3} \d{4}$', fecha):
-        # Formato: "JUL-SEP 2011" (usamos el primer mes del rango)
-        return pd.to_datetime("01 " + fecha.split('-')[0] + " " + fecha[-4:], format='%d %b %Y', errors='coerce')
-
-    if "JAN-FEB" in fecha:
-        # Manejar el rango de meses como una fecha arbitraria del primer mes
-        return pd.to_datetime("01 " + fecha.split('-')[0] + " 2000", format='%d %b %Y', errors='coerce')
-
-    try:
-        if re.match(r'^\w{3} \d{1,2}, \d{4}$', fecha):
-            # Formato: "DEC 28, 2015"
-            return pd.to_datetime(fecha, format='%b %d, %Y', errors='coerce')
-        elif re.match(r'^\w{3} \d{1,2} \d{4}$', fecha):
-            # Formato: "MAY 3 2017"
-            return pd.to_datetime(fecha, format='%b %d %Y', errors='coerce')
-        elif re.match(r'^\w{3} \d{4}$', fecha):
-            # Formato: "FEB 2020"
-            return pd.to_datetime(fecha, format='%b %Y', errors='coerce')
-        elif re.match(r'^\d{1,2} \w{3} \d{4}$', fecha):
-            # Formato: "28 DEC 2015"
-            return pd.to_datetime(fecha, format='%d %b %Y', errors='coerce')
-        elif re.match(r'^\w{3} \d{2}$', fecha):
-            # Formato: "JAN 20" (asumiendo que el año es actual)
-            return pd.to_datetime(fecha + ' ' + str(pd.to_datetime('today').year), format='%b %Y', errors='coerce')
-        else:
-            # Formato no reconocido
-            return pd.NaT
-    except Exception as e:
-        return pd.NaT

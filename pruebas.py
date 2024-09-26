@@ -1,75 +1,88 @@
-from Menu.utilidades import RUTA_PUBLICACIONES, RUTA_PUBLICACIONES_KERAS
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+import re
+import time
+import unicodedata
 import pandas as pd
-import numpy as np
-import keras.saving as saving
+import streamlit as st
+import plotly.graph_objects as go
+from sklearn.linear_model import LinearRegression
+from Menu.utilidades import RUTA_PUBLICACIONES, RUTA_PATENTES
 
-# Cargar el modelo previamente entrenado
-model = saving.load_model(RUTA_PUBLICACIONES_KERAS)
+def mostrar_Prueba():
 
-# Cargar el archivo RUTA_PUBLICACIONES
-ruta_publicaciones = RUTA_PUBLICACIONES
-data = pd.read_csv(ruta_publicaciones)
+    start_time = time.time()
 
-# Mostrar las primeras filas para asegurarnos de que los datos se cargaron correctamente
-print(data.head())
+    # Función para agregar trazados en la gráfica
+    def agregar_trazado(fig, x, y, name, color, dash='solid'):
+        fig.add_trace(go.Scatter(x=x, y=y, mode='lines+markers', name=name, 
+                                marker=dict(color=color), line=dict(color=color, dash=dash)))
 
-# Función para obtener los datos de un autor
-def obtener_datos_autor(nombre_autor, data, preprocessor):
-    # Filtrar los datos del autor seleccionado
-    autor_info = data[data['Authors'] == nombre_autor]
+
+    # Cargar solo las columnas necesarias
+    df_patentes = pd.read_csv(RUTA_PATENTES, encoding='latin1', usecols=['Inventor', 'Filing Date'])
+    df_publicaciones = pd.read_csv(RUTA_PUBLICACIONES, usecols=['Authors', 'Publication Date', 'Title', 'Total Citations'])
+
+    # Normalizar y procesar fechas de forma vectorizada
+    df_patentes['Filing Date'] = pd.to_datetime(df_patentes['Filing Date'], format='%d/%m/%Y', dayfirst=True)
+    df_patentes['Inventor'] = df_patentes['Inventor'].str.normalize('NFKD').str.encode('ascii', 'ignore').str.decode('utf-8').str.upper()
+    df_publicaciones['Publication Date'] = pd.to_datetime(df_publicaciones['Publication Date'], format='%d/%m/%Y', errors='coerce')
+    df_publicaciones['Authors'] = df_publicaciones['Authors'].str.strip()
+
+    # Filtrar datos entre 2005 y 2023 de manera eficiente
+    df_publicaciones = df_publicaciones[(df_publicaciones['Publication Date'].dt.year.between(2005, 2023))]
+    df_patentes = df_patentes[(df_patentes['Filing Date'].dt.year.between(2005, 2023))]
+
+    # Eliminar duplicados
+    df_patentes_unique = df_patentes.drop_duplicates(subset=['Inventor', 'Filing Date'])
+
+    # Agrupar publicaciones por autor y fecha de publicación
+    publicaciones_autor_fecha = df_publicaciones.groupby(['Authors', df_publicaciones['Publication Date'].dt.year]).size().reset_index(name='Publicaciones')
+
+    # Calcular publicaciones antes y después
+    def calcular_publicaciones(fecha_patente, autor):
+        publicaciones = publicaciones_autor_fecha[publicaciones_autor_fecha['Authors'] == autor]
+        antes = publicaciones[publicaciones['Publication Date'] < fecha_patente]
+        despues = publicaciones[publicaciones['Publication Date'] >= fecha_patente]
+        return len(antes), len(despues)
+
+    # Aplicar cálculo a todo el dataframe de forma vectorizada
+    df_patentes_unique[['Publicaciones antes', 'Publicaciones después']] = df_patentes_unique.apply(
+        lambda row: calcular_publicaciones(row['Filing Date'].year, row['Inventor']),
+        axis=1, result_type='expand'
+    )
+
+    # Calcular el cambio en publicaciones
+    df_patentes_unique['Cambio en Publicaciones'] = df_patentes_unique['Publicaciones después'] - df_patentes_unique['Publicaciones antes']
+
+    # Selección de autor
+    autor_seleccionado = st.selectbox("Seleccione un autor", df_patentes_unique['Inventor'].unique())
+
+    # Filtrar por autor seleccionado
+    df_autor = df_patentes_unique[df_patentes_unique['Inventor'] == autor_seleccionado]
+    df_autor_publicaciones = df_publicaciones[df_publicaciones['Authors'] == autor_seleccionado]
+
+    # Agrupar publicaciones por año
+    df_autor_publicaciones['Año'] = df_autor_publicaciones['Publication Date'].dt.year
+    publicaciones_por_año = df_autor_publicaciones.groupby('Año').size().reset_index(name='Publicaciones')
+
+    # Agrupar patentes por año
+    df_autor['Año'] = df_autor['Filing Date'].dt.year
+    patentes_por_año = df_autor.groupby('Año').size().reset_index(name='Patentes')
+
+    # Unir datos de publicaciones y patentes
+    datos_combinados = pd.merge(publicaciones_por_año, patentes_por_año, on='Año', how='outer').fillna(0)
+
+    # Crear la gráfica después de realizar todos los cálculos
+    fig = go.Figure()
+
+    # Añadir datos de publicaciones y patentes
+    agregar_trazado(fig, datos_combinados['Año'], datos_combinados['Publicaciones'], 'Publicaciones', 'blue')
     
-    if autor_info.empty:
-        print(f"No se encontraron datos para el autor: {nombre_autor}")
-        return None
+    # Mostrar gráfica
+    st.plotly_chart(fig)
 
-    # Seleccionar las columnas necesarias para el modelo
-    columnas_requeridas = [
-        'Total Citations', 'Average per Year', '2005', '2006', '2007', '2008', '2009', '2010',
-        '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023',
-        'Authors', 'Corporate Authors', 'Book Editors', 'Source Title', 'Conference Title'
-    ]
-    
-    # Extraer los datos del autor en el formato correcto
-    input_data = autor_info[columnas_requeridas]
+    # Mostrar resumen
+    st.dataframe(df_autor[['Inventor', 'Filing Date', 'Publicaciones antes', 'Publicaciones después', 'Cambio en Publicaciones']], use_container_width=True)
 
-    # Imprimir los datos extraídos para validación
-    print(f"Datos encontrados para el autor {nombre_autor}:")
-    print(input_data)
+    end_time = time.time()
+    st.write(f"Tiempo de ejecución: {end_time - start_time} segundos")
 
-    # Aplicar el preprocesamiento (estandarización y codificación OneHot)
-    input_data_encoded = preprocessor.transform(input_data)
-    
-    # Convertir csr_matrix a un array denso para el modelo
-    input_data_encoded = input_data_encoded.toarray()
-    
-    return input_data_encoded
-
-# Creación del preprocessor una vez
-numeric_features = ['Total Citations', 'Average per Year'] + [str(year) for year in range(2005, 2023)]
-categorical_features = ['Authors', 'Corporate Authors', 'Book Editors', 'Source Title', 'Conference Title']
-
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('num', StandardScaler(), numeric_features),
-        ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
-    ])
-
-# Asegúrate de ajustar tu preprocesador a los datos completos antes de usar la función.
-preprocessor.fit(data)
-
-# El usuario ingresa el nombre del autor
-nombre_autor = input("Ingrese el nombre del autor a buscar: ")
-
-# Obtener los datos del autor
-input_data = obtener_datos_autor(nombre_autor, data, preprocessor)
-
-if input_data is not None:
-    # Hacer la predicción usando el modelo cargado previamente
-
-    # Hacer la predicción con el modelo
-    probabilidad_publicacion_2024 = model.predict(input_data)
-    
-    # Mostrar el resultado
-    print(f"Probabilidad de que el autor {nombre_autor} publique en 2024: {probabilidad_publicacion_2024[0][0]:.2f}")
