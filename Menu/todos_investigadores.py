@@ -4,7 +4,7 @@ from Menu.utilidades import RUTA_PUBLICACIONES, procesar_estadisticas_autores
 
 
 def mostrar_todos_investigadores():
-    st.subheader("Todos los investigadores")
+    st.markdown("<h2 style='text-align: center;'>Todos los investigadores</h2>", unsafe_allow_html=True)
 
     author_stats = procesar_estadisticas_autores(RUTA_PUBLICACIONES)
 
@@ -41,29 +41,33 @@ def mostrar_todos_investigadores():
 
     # Actualizar el diseño del gráfico
     fig.update_layout(
-        title='Número de Artículos y Citas Totales por Autor',
+        title='Número de Artículos y Citas Totales',
         xaxis_title='Autores',
         yaxis_title='Número de Artículos',
         yaxis=dict(
             title='Número de Artículos',
             titlefont=dict(color='blue'),
             tickfont=dict(color='blue'),
-            side='left'
+            side='left',
+            showgrid=True  # Mostrar líneas de cuadrícula para el eje derecho
         ),
         yaxis2=dict(
             title='Citas Totales',
             titlefont=dict(color='red'),
             tickfont=dict(color='red'),
             overlaying='y',
-            side='right'
+            side='right',
+            showgrid=True  # Mostrar líneas de cuadrícula para el eje derecho
         ),
         xaxis=dict(
             tickmode='array',
             tickvals=filtered_stats['Authors'],
             ticktext=filtered_stats['Authors'],
-            tickangle=-90
+            tickangle=-45,  # Rotar etiquetas para mejor legibilidad
+            ticks='outside',  # Colocar ticks fuera
         ),
         autosize=True,
-        height=800
+        height=800,
+        margin=dict(l=50, r=50, t=50, b=150),  # Espacios alrededor del gráfico
     )
     st.plotly_chart(fig)

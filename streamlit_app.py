@@ -27,9 +27,9 @@ with st.sidebar:
         "Menú",
         ["Inicio", "Buscar Investigador", "Comparar investigadores", "Todos los investigadores",
          "Análisis de Coautoría", "Análisis de patentes","Análisis Kmeans",
-         "Análisis de conferencias"],
+         ],
         icons=['house', 'search', 'person-arms-up', 'people-fill', 'graph-up',
-               'file-earmark-bar-graph-fill','bar-chart-fill','calendar'],
+               'file-earmark-bar-graph-fill','bar-chart-fill'],
         menu_icon="clipboard-data-fill",
         default_index=0
     )
@@ -49,5 +49,3 @@ elif selected == "Análisis de patentes":
     mostrar_analisis_patentes()
 elif selected == "Análisis Kmeans":
     mostrar_analisis_kmeans()
-# elif selected== "Análisis de conferencias":
-#     mostrar_Prueba()

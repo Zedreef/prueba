@@ -4,6 +4,8 @@ import plotly.graph_objects as go
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from pyclustering.cluster.kmedoids import kmedoids
+from sklearn.metrics import silhouette_score
+import numpy as np
 from Menu.utilidades import RUTA_PUBLICACIONES, RUTA_PATENTES
 
 def cargar_datos():
@@ -19,8 +21,8 @@ def preprocesar_datos(df_datosC, df_PreP):
     df_PreP = df_PreP[['Authors', 'Patent']]
     df_datosP = df_PreP.groupby('Authors')['Patent'].nunique()
 
-    df_combinado = pd.merge(df_datosC, df_datosP, on='Authors', how='inner')
-    return df_datosC, df_datosP, df_combinado.fillna(0)
+    df_combinado = pd.merge(df_datosC, df_datosP, on='Authors', how='outer').fillna(0)
+    return df_datosC, df_datosP, df_combinado
 
 def graficar_kmeans(X, labels, centers, title, xlabel, ylabel):
     fig = go.Figure()
@@ -42,7 +44,6 @@ def graficar_kmeans(X, labels, centers, title, xlabel, ylabel):
     st.plotly_chart(fig)
 
 def graficar_kmedoids(X, labels, medoids, title, xlabel, ylabel):
-    # Crear un array para las etiquetas
     cluster_labels = [None] * len(X)
     for cluster_id, indices in enumerate(labels):
         for index in indices:
@@ -66,6 +67,19 @@ def graficar_kmedoids(X, labels, medoids, title, xlabel, ylabel):
     fig.update_layout(title=title, xaxis_title=xlabel, yaxis_title=ylabel)
     st.plotly_chart(fig)
 
+def calcular_numero_optimo_kmeans(X):
+    inertia = []
+    K_range = range(1, 11)
+    for k in K_range:
+        kmeans = KMeans(n_clusters=k, n_init='auto', random_state=42)
+        kmeans.fit(X)
+        inertia.append(kmeans.inertia_)
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=list(K_range), y=inertia, mode='lines+markers'))
+    fig.update_layout(title='Método del Codo para KMeans', xaxis_title='Número de Clusters', yaxis_title='Inercia')
+    st.plotly_chart(fig)
+
 def mostrar_analisis_kmeans():
     df_datosC, df_PreP = cargar_datos()
     
@@ -73,44 +87,89 @@ def mostrar_analisis_kmeans():
     
     df_datosC, df_datosP, df_combinado = preprocesar_datos(df_datosC, df_PreP)
 
+    st.markdown("<h3 style='text-align: center;'>Distribución de los Datos</h3>", unsafe_allow_html=True)
+
+    # Escalar los datos
+    X_datosC = df_datosC[['Publications', 'Total Citations']].values
+    X_datosC_scaled = StandardScaler().fit_transform(X_datosC)
+    
+    X_combinado = df_combinado[['Publications', 'Patent']].values
+    X_combinado_scaled = StandardScaler().fit_transform(X_combinado)
+
+    # Selección del número de clusters por el usuario
+    n_clusters = st.slider('Selecciona el número de clusters:', min_value=2, max_value=10, value=4)
+
+    col3, col4 = st.columns(2)
+    fig = go.Figure()
+
+    with col3:
+        # Mostrar la gráfica del método del codo y distribución de los datos antes de clustering
+        calcular_numero_optimo_kmeans(X_combinado_scaled)
+    with col4:
+        # Visualizar la distribución de los datos antes de clustering
+        fig.update_layout(title='Distribución: Publicaciones vs Patentes', xaxis_title='Publications', yaxis_title='Patents')
+        fig.add_trace(go.Scatter(x=df_combinado['Publications'], y=df_combinado['Patent'], mode='markers'))
+        st.plotly_chart(fig)
+
     # Análisis KMeans y KMedoids en columnas
     col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("<h2 style='text-align: center;'>KMeans</h2>", unsafe_allow_html=True)
-        X_datosC = df_datosC[['Publications', 'Total Citations']].values
-        X_datosC_scaled = StandardScaler().fit_transform(X_datosC)
-
-        kmeans_model = KMeans(n_clusters=3, n_init='auto')
+        kmeans_model = KMeans(n_clusters=n_clusters, n_init='auto', random_state=42)
         kmeans_model.fit(X_datosC_scaled)
         graficar_kmeans(X_datosC_scaled, kmeans_model.labels_, kmeans_model.cluster_centers_, 
-                        "KMeans: Autores Publicados (Escalados)", 'Publications (Escaladas)', 'Total Citations (Escaladas)')
+                        "KMeans: Autores Publicados", 'Publications (Escaladas)', 'Total Citations (Escaladas)')
 
-        X_combinado = df_combinado[['Publications', 'Patent']].values
-        kmeans_model_combinado = KMeans(n_clusters=3, n_init='auto')
-        kmeans_model_combinado.fit(X_combinado)
-        graficar_kmeans(X_combinado, kmeans_model_combinado.labels_, kmeans_model_combinado.cluster_centers_, 
-                        "KMeans: Autores Publicados vs Patentes", 'Publications', 'Patents')
+        # Métrica silhouette para evaluar el clustering de KMeans
+        silhouette_avg = silhouette_score(X_datosC_scaled, kmeans_model.labels_)
+        st.write(f"Coeficiente de Silhouette para KMeans (Publicaciones): {silhouette_avg:.2f}")
+
+        kmeans_model_combinado = KMeans(n_clusters=n_clusters, n_init='auto', random_state=42)
+        kmeans_model_combinado.fit(X_combinado_scaled)
+        graficar_kmeans(X_combinado_scaled, kmeans_model_combinado.labels_, kmeans_model_combinado.cluster_centers_, 
+                        "KMeans: Autores Publicados vs Patentes", 'Publications (Escaladas)', 'Patents (Escaladas)')
+
+        silhouette_combined_avg = silhouette_score(X_combinado_scaled, kmeans_model_combinado.labels_)
+        st.write(f"Coeficiente de Silhouette para KMeans (Publicaciones vs Patentes): {silhouette_combined_avg:.2f}")
 
     with col2:
         st.markdown("<h2 style='text-align: center;'>KMedoids</h2>", unsafe_allow_html=True)
-        initial_medoids = [0, 1, 2]  # Indices de los medoids iniciales
+        initial_medoids = np.random.choice(len(X_datosC), n_clusters, replace=False).tolist()  # Elegir n_clusters medoids aleatorios
         kmedoids_model = kmedoids(X_datosC.tolist(), initial_medoids)
         kmedoids_model.process()
         labels = kmedoids_model.get_clusters()
         medoids = kmedoids_model.get_medoids()
-        
-        # Convertir medoids a array para graficar
+
+        # Convertir las etiquetas de clusters a un array de etiquetas
+        labels_flat = np.zeros(len(X_datosC))
+        for cluster_id, cluster in enumerate(labels):
+            for index in cluster:
+                labels_flat[index] = cluster_id
+
         medoids_coords = X_datosC[medoids]
         graficar_kmedoids(X_datosC, labels, medoids_coords, 
-                          "KMedoids: Autores Publicados", 'Publications', 'Total Citations')
+                        "KMedoids: Autores Publicados", 'Publications', 'Total Citations')
+        
+        # Calcular el coeficiente de Silhouette para KMedoids
+        silhouette_kmedoids_avg = silhouette_score(X_datosC, labels_flat)
+        st.write(f"Coeficiente de Silhouette para KMedoids (Publicaciones): {silhouette_kmedoids_avg:.2f}")
 
-        initial_medoids_combined = [0, 1, 2]  # Indices de los medoids iniciales
-        kmedoids_model_combined = kmedoids(X_combinado.tolist(), initial_medoids_combined)
+        kmedoids_model_combined = kmedoids(X_combinado.tolist(), initial_medoids)
         kmedoids_model_combined.process()
         labels_combined = kmedoids_model_combined.get_clusters()
         medoids_combined = kmedoids_model_combined.get_medoids()
-        
+
+        # Convertir las etiquetas combinadas a un array de etiquetas
+        labels_combined_flat = np.zeros(len(X_combinado))
+        for cluster_id, cluster in enumerate(labels_combined):
+            for index in cluster:
+                labels_combined_flat[index] = cluster_id
+
         medoids_combined_coords = X_combinado[medoids_combined]
         graficar_kmedoids(X_combinado, labels_combined, medoids_combined_coords, 
-                          "KMedoids: Autores Publicados vs Patentes", 'Publications', 'Patents')
+                        "KMedoids: Autores Publicados vs Patentes", 'Publications', 'Patents')
+        
+        # Calcular el coeficiente de Silhouette para KMedoids combinado
+        silhouette_kmedoids_combined_avg = silhouette_score(X_combinado, labels_combined_flat)
+        st.write(f"Coeficiente de Silhouette para KMedoids (Publicaciones vs Patentes): {silhouette_kmedoids_combined_avg:.2f}")
