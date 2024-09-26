@@ -157,7 +157,7 @@ def mostrar_analisis_patentes():
         title=f"Tendencia de Publicaciones de {autor_seleccionado}",
         xaxis_title="Año",
         yaxis_title="Publicaciones",
-        xaxis_tickangle=-45  # Rotar etiquetas del eje x para evitar sobreposición
+        xaxis_tickangle=-45
     )
 
     # Mostrar gráfica
