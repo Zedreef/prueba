@@ -6,17 +6,17 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # ----------------------- Ruta App ---------------------------------------------
-# RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
-# RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
-# RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
-# RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
-# RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
-# ----------------------- Ruta GitHub ------------------------------------------
-RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
-RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
-RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
-RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+RUTA_BRUTOS = '/mount/src/prueba/Datos Brutos'
+RUTA_GUARDADO = '/mount/src/prueba/Datos Completos'
+RUTA_PUBLICACIONES = 'Analisis/Publicaciones.csv'
+RUTA_PATENTES = 'Analisis/Investigadores PATENTES.csv'
 RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
+# ----------------------- Ruta GitHub ------------------------------------------
+# RUTA_BRUTOS  = '/workspaces/prueba/Datos Brutos'
+# RUTA_GUARDADO  = '/workspaces/prueba/Datos Completos'
+# RUTA_PUBLICACIONES  = 'Analisis/Publicaciones.csv'
+# RUTA_PATENTES  = 'Analisis/Investigadores PATENTES.csv'
+# RUTA_PUBLICACIONES_KERAS = 'Analisis/Entrena_Publicaciones.keras'
 # -------------------------------------------------------------------------------
 
 # ----------------------- Funciones --------------------------------------------
@@ -33,33 +33,6 @@ def calcular_indice_h(df):
         else:
             break
     return h_index
-
-# Función para calcular el resumen de citas para cada autor
-def calcular_resumen(df):
-    resumen = []
-
-    # Obtener los autores únicos
-    autores = df['Authors'].unique()
-
-    for autor in autores:
-        # Filtrar los datos para el autor actual
-        df_autor = df[df['Authors'] == autor]
-
-        # Calcular la suma de 'Total Citations', el promedio de 'Average per Year', y el índice h
-        total_citations = df_autor['Total Citations'].sum()
-        average_per_year = df_autor['Average per Year'].mean()
-        h_index = calcular_indice_h(df_autor)
-
-        # Agregar los datos al resumen
-        resumen.append({
-            'Autor': autor,
-            'Total de Citas': total_citations,
-            'Promedio por Año': average_per_year,
-            'Índice h': h_index
-        })
-
-    # Convertir el resumen en un DataFrame
-    return pd.DataFrame(resumen)
 
 # Función para graficar citas y publicaciones por año
 def graficar_citas_publicaciones_Comparados(df):
