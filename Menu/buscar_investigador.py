@@ -14,8 +14,9 @@ ruta_publicaciones = RUTA_PUBLICACIONES
 data = pd.read_csv(ruta_publicaciones)
 
 # Creación del preprocessor una vez
-numeric_features = ['Total Citations', 'Average per Year'] + [str(year) for year in range(2005, 2023)]
-categorical_features = ['Authors', 'Corporate Authors', 'Book Editors', 'Source Title', 'Conference Title']
+numeric_features = ['Total Citations', 'Average per Year'] + \
+    [col for col in data.columns if col.isdigit() and 1960 <= int(col) <= 2023]
+categorical_features = ['Title', 'Authors', 'Corporate Authors', 'Book Editors', 'Source Title']
 
 preprocessor = ColumnTransformer(
     transformers=[
@@ -35,11 +36,15 @@ def obtener_datos_autor(nombre_autor, data, preprocessor):
         return None
 
     # Seleccionar las columnas necesarias para el modelo
-    columnas_requeridas = [
-        'Total Citations', 'Average per Year', '2005', '2006', '2007', '2008', '2009', '2010',
-        '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023',
-        'Authors', 'Corporate Authors', 'Book Editors', 'Source Title', 'Conference Title'
-    ]
+    columnas_requeridas = ['Total Citations', 'Average per Year',
+                 '1960','1961','1962','1964','1965','1966','1968','1969','1975',
+                 '1976','1979','1980','1981','1982','1983','1984','1985','1986',
+                 '1987','1988','1989','1990','1991','1992','1993','1994','1995',
+                 '1996','1997','1998','1999','2000','2001','2002','2003','2004',
+                 '2005','2006','2007','2008','2009','2010','2011','2012','2013',
+                 '2014','2015','2016','2017','2018','2019','2020','2021','2022',
+                 '2023','Title','Authors', 'Corporate Authors', 'Book Editors',
+                 'Source Title']
     
     # Extraer los datos del autor en el formato correcto
     input_data = autor_info[columnas_requeridas]
@@ -92,8 +97,11 @@ def mostrar_buscar_investigador(ruta_publicaciones):
                     g = int(255 * probabilidad)        
                     color = f"rgb({r}, {g}, 0)"
 
+                # Escalar la predicción de nuevo al rango de 0-100.
+                probabilidad_scaled = probabilidad * 100
+
                 # Mostrar la probabilidad de publicación en 2024
-                st.markdown(f"Probabilidad de que el autor publique en 2024:  <span style='color: {color}; font-weight: bold;'>{probabilidad:.2f}</span>", unsafe_allow_html=True)
+                st.markdown(f"Probabilidad de que el autor publique en 2024:  <span style='color: {color}; font-weight: bold;'>{probabilidad_scaled:.2f}</span>", unsafe_allow_html=True)
 
             else:
                 st.error(f"No se encontraron datos suficientes.")

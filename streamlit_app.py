@@ -7,7 +7,7 @@ from Menu.todos_investigadores import mostrar_todos_investigadores
 from Menu.analisis_coautoria import mostrar_analisis_coautoria
 from Menu.analisis_patentes import mostrar_analisis_patentes
 from Menu.kmeans_investigadores import mostrar_analisis_kmeans
-# from pruebas import mostrar_Prueba
+from Menu.Entrenamiento_Publicaciones import mostrar_keras
 
 # Librerías de visualización
 import streamlit as st
@@ -26,10 +26,10 @@ with st.sidebar:
     selected = option_menu(
         "Menú",
         ["Inicio", "Buscar Investigador", "Comparar investigadores", "Todos los investigadores",
-         "Análisis de Coautoría", "Análisis de patentes","Análisis Kmeans",
+         "Análisis de Coautoría", "Análisis de patentes","Análisis Kmeans","Análisis Keras",
          ],
         icons=['house', 'search', 'person-arms-up', 'people-fill', 'graph-up',
-               'file-earmark-bar-graph-fill','bar-chart-fill'],
+               'file-earmark-bar-graph-fill','bar-chart-fill','server'],
         menu_icon="clipboard-data-fill",
         default_index=0
     )
@@ -49,3 +49,5 @@ elif selected == "Análisis de patentes":
     mostrar_analisis_patentes()
 elif selected == "Análisis Kmeans":
     mostrar_analisis_kmeans()
+elif selected == "Análisis Keras":
+    mostrar_keras()
