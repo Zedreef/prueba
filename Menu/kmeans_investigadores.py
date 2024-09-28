@@ -147,29 +147,29 @@ def mostrar_analisis_kmeans():
             for index in cluster:
                 labels_flat[index] = cluster_id
 
-        medoids_coords = X_datosC[medoids]
-        graficar_kmedoids(X_datosC, labels, medoids_coords, 
-                        "KMedoids: Autores Publicados", 'Publications (Escaldas)', 'Total Citations(Escaladas)')
+        medoids_coords = X_datosC_scaled[medoids]
+        graficar_kmedoids(X_datosC_scaled, labels, medoids_coords, 
+                        "KMedoids: Autores Publicados", 'Publications (Escaladas)', 'Total Citations(Escaladas)')
         
         # Calcular el coeficiente de Silhouette para KMedoids
         silhouette_kmedoids_avg = silhouette_score(X_datosC_scaled, labels_flat)
         st.write(f"Coeficiente de Silhouette para KMedoids (Publicaciones): {silhouette_kmedoids_avg:.2f}")
 
-        kmedoids_model_combined = kmedoids(X_combinado.tolist(), initial_medoids)
+        kmedoids_model_combined = kmedoids(X_combinado_scaled.tolist(), initial_medoids)
         kmedoids_model_combined.process()
         labels_combined = kmedoids_model_combined.get_clusters()
         medoids_combined = kmedoids_model_combined.get_medoids()
 
         # Convertir las etiquetas combinadas a un array de etiquetas
-        labels_combined_flat = np.zeros(len(X_combinado))
+        labels_combined_flat = np.zeros(len(X_combinado_scaled))
         for cluster_id, cluster in enumerate(labels_combined):
             for index in cluster:
                 labels_combined_flat[index] = cluster_id
 
-        medoids_combined_coords = X_combinado[medoids_combined]
-        graficar_kmedoids(X_combinado, labels_combined, medoids_combined_coords, 
+        medoids_combined_coords = X_combinado_scaled[medoids_combined]
+        graficar_kmedoids(X_combinado_scaled, labels_combined, medoids_combined_coords, 
                         "KMedoids: Autores Publicados vs Patentes", 'Publications', 'Patents')
         
         # Calcular el coeficiente de Silhouette para KMedoids combinado
-        silhouette_kmedoids_combined_avg = silhouette_score(X_combinado, labels_combined_flat)
+        silhouette_kmedoids_combined_avg = silhouette_score(X_combinado_scaled, labels_combined_flat)
         st.write(f"Coeficiente de Silhouette para KMedoids (Publicaciones vs Patentes): {silhouette_kmedoids_combined_avg:.2f}")
