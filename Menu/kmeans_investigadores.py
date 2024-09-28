@@ -135,24 +135,24 @@ def mostrar_analisis_kmeans():
 
     with col2:
         st.markdown("<h2 style='text-align: center;'>KMedoids</h2>", unsafe_allow_html=True)
-        initial_medoids = np.random.choice(len(X_datosC), n_clusters, replace=False).tolist()  # Elegir n_clusters medoids aleatorios
-        kmedoids_model = kmedoids(X_datosC.tolist(), initial_medoids)
+        initial_medoids = np.random.choice(len(X_datosC_scaled), n_clusters, replace=False).tolist()  # Elegir n_clusters medoids aleatorios
+        kmedoids_model = kmedoids(X_datosC_scaled.tolist(), initial_medoids)
         kmedoids_model.process()
         labels = kmedoids_model.get_clusters()
         medoids = kmedoids_model.get_medoids()
 
         # Convertir las etiquetas de clusters a un array de etiquetas
-        labels_flat = np.zeros(len(X_datosC))
+        labels_flat = np.zeros(len(X_datosC_scaled))
         for cluster_id, cluster in enumerate(labels):
             for index in cluster:
                 labels_flat[index] = cluster_id
 
         medoids_coords = X_datosC[medoids]
         graficar_kmedoids(X_datosC, labels, medoids_coords, 
-                        "KMedoids: Autores Publicados", 'Publications', 'Total Citations')
+                        "KMedoids: Autores Publicados", 'Publications (Escaldas)', 'Total Citations(Escaladas)')
         
         # Calcular el coeficiente de Silhouette para KMedoids
-        silhouette_kmedoids_avg = silhouette_score(X_datosC, labels_flat)
+        silhouette_kmedoids_avg = silhouette_score(X_datosC_scaled, labels_flat)
         st.write(f"Coeficiente de Silhouette para KMedoids (Publicaciones): {silhouette_kmedoids_avg:.2f}")
 
         kmedoids_model_combined = kmedoids(X_combinado.tolist(), initial_medoids)
