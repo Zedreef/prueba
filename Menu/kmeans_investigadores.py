@@ -168,7 +168,7 @@ def mostrar_analisis_kmeans():
 
         medoids_combined_coords = X_combinado_scaled[medoids_combined]
         graficar_kmedoids(X_combinado_scaled, labels_combined, medoids_combined_coords, 
-                        "KMedoids: Autores Publicados vs Patentes", 'Publications', 'Patents')
+                        "KMedoids: Autores Publicados vs Patentes", 'Publications (Escaladas)', 'Patents(Escaladas)')
         
         # Calcular el coeficiente de Silhouette para KMedoids combinado
         silhouette_kmedoids_combined_avg = silhouette_score(X_combinado_scaled, labels_combined_flat)
