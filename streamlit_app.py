@@ -17,7 +17,7 @@ from streamlit_option_menu import option_menu
 
 # ---------------- Configuración de la página -----------------------------------
 st.set_page_config(page_title="Investigadores", layout="wide")
-
+st.sidebar.image("img/CBI.png")
 # ----------------------------- Menú lateral ------------------------------------
 # Los iconos que usa son de Bootstrap Icons
 with st.sidebar:
