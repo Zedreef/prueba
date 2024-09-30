@@ -15,6 +15,12 @@ import streamlit as st
 # Otras librerías
 from streamlit_option_menu import option_menu
 
+# ---------------- Integrantes Inteligencia Artificial --------------------------
+# Ruiz Mora Diego                     2202000335
+# Morales Mogollon Bryan              2202004306
+# Fernandez Pineda Carlos Adrian      2162000644
+# -------------------------------------------------------------------------------
+
 # ---------------- Configuración de la página -----------------------------------
 st.set_page_config(page_title="Investigadores", layout="wide")
 st.sidebar.image("img/CBI.png")
